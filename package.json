@@ -1,14 +1,21 @@
 {
   "name": "yuhui",
   "version": "1.0.0",
-  "description": "",  
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
     "d": "bash deploy.sh"
   },
   "keywords": [],
   "author": "alvin.mi0620@gmail.com",
-  "license": "ISC"
+  "license": "ISC",
+  "resolutions": {
+    "terser": "3.14.1",
+    "webpack-dev-middleware": "3.6.0"
+  },
+  "devDependencies": {
+    "vuepress": "^0.14.10"
+  }
 }

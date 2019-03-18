@@ -1,7 +1,7 @@
 ---
 home: true
 # heroImage: /alvinmi.jpeg
-actionText: Get Started →
+actionText: 开始持续学习 →
 actionLink: /about/
 footer: 余辉 Copyright © 2018
 ---
@@ -12,20 +12,20 @@ footer: 余辉 Copyright © 2018
 
 <div class="features">
   <div class="feature">
-    <h2>Simplicity First</h2>
-    <p>Minimal setup with markdown-centered project structure helps you focus on writing.</p>
+    <h2>前端篇技术总结</h2>
+    <p>总结日常用到的答疑，和技术坑。</p>
   </div>
   <div class="feature">
-    <h2>Vue-Powered</h2>
-    <p>Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.</p>
+    <h2>后端篇技术积累</h2>
+    <p>需要懂点后台技能。</p>
   </div>
   <div class="feature">
-    <h2>Performant</h2>
-    <p>VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.</p>
+    <h2>观望物联网</h2>
+    <p>总结自己关注的嵌入式、物联网相关。</p>
   </div>
 </div>
 
-### test
+### 安装
 
 ``` bash
 # install
@@ -45,3 +45,7 @@ vuepress build
 ::: warning COMPATIBILITY NOTE
 VuePress requires Node.js >= 8.
 :::
+
+遇到了 vuepress UnhandledPromiseRejectionWarning 警告，导致浏览器不能预览。
+
+- 参考： https://github.com/vuejs/vuepress/issues/1417
