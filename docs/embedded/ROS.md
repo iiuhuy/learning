@@ -35,11 +35,10 @@ ROS 是一种分布式处理框架，开发者可以单独设计可执行文件�
 
 主要重心还是放在前端，后面同时会关注国外玩 ROS 的一些项目，例如之前在 medium 看到一篇使用 [Bootstrap 4 + ROS : creating a web UI for your robot](https://medium.com/husarion-blog/bootstrap-4-ros-creating-a-web-ui-for-your-robot-9a77a8e373f9)。medium 上面的文章需要趴梯子哟。
 
-
 其他相关链接：
 
 - [awesome-ros2](https://github.com/fkromer/awesome-ros2)
 - [awesome-robotics](https://github.com/kiloreux/awesome-robotics)
 - [rosindustrial ROS 工业版](https://rosindustrial.org/)
 
-## todo 持续更新 ... 
+## todo 持续更新 ...

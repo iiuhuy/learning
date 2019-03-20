@@ -40,6 +40,14 @@ vuepress dev
 
 # build to static files
 vuepress build
+
+# npx 
+npx vuepress dev docs
+
+# 使用 yarn 
+yarn dev
+
+yarn build
 ```
 
 ::: warning COMPATIBILITY NOTE
