@@ -50,6 +50,11 @@ yarn dev
 yarn build
 ```
 
+### 部署
+
+```
+bash deploy.sh
+```
 ::: warning COMPATIBILITY NOTE
 VuePress requires Node.js >= 8.
 :::
