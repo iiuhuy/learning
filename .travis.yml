@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "8.15.1"
+  - stable
 
 cache:
   directories:
@@ -15,7 +15,8 @@ install:
   - npm run build
 
 script:
-  - ./deploy.sh
+  - chmod u+x deploy.sh
+  - bash ./deploy.sh
 
 # deploy:
 #   provider: pages
