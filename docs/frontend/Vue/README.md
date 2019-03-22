@@ -1,8 +1,9 @@
 # Vue 相关
 
-MVVM 与 MVC 框架的区别：
+MVVM 模式：
 
 Model-View-ViewModel 的简写，有时候又称 [Model–view–binder](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)。
+特点：Model 层是数据层，它只关心数据本身，不关心数据如何操作和展示；View 是视图层，负责将数据模型转化为 UI 展现给用户；ViewModel 为视图提供引擎，用来处理业务逻辑。
 
 - 实现数据
 
@@ -27,7 +28,11 @@ beforeCreate(创建前) → created(创建后)
 #### 2.2.第一次页面加载会触发哪几个钩子？
 
 ```
-第一次页面加载会触发： beforeCreate(创建前)、created(创建后)、beforeMount(载入前)、mounted(载入后) 这几个钩子。
+第一次页面加载会触发： 
+beforeCreate(创建前)、
+created(创建后)、
+beforeMount(载入前)、
+mounted(载入后) 这几个钩子。
 ```
 
 #### 2.3.DOM 渲染在哪个生命周期就已经完成？
