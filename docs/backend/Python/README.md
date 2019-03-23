@@ -13,7 +13,7 @@ $ bash Anaconda3-5.3.1-Linux-x86_64.sh
 
 然后根据提示回车和输入 yes 就行。如果使用 `zsh`, 将 `~/.bashrc` 下自动添加的环境变量添加到 `~/.zshrc` 文件末尾， 然后 `source ~/.zshrc`
 
-```zsh
+```bash
 # added by Anaconda3 5.3.1 installer
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!

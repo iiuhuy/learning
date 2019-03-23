@@ -25,3 +25,5 @@ React 全家桶！
 
 Python 不像 Node.js, 通过 NPM 安装包时，全局和局部只需要一个参数就能区分， 安装在当前项目环境的包，不会影响其他的项目环境。而 Python 不行啊，所以就用 `virtualenv`，来把每个项目封装在虚拟环境中，这样就避免互相影响。
 
+virtualenv 虚拟环境的搭建可以参考，[Python 基础中的开头环境搭建部分](https://alvinmi.github.io/Developer-notes/backend/Python/#%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-anaconda-%E5%AE%89%E8%A3%85)。
+
