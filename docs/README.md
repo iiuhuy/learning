@@ -10,6 +10,8 @@ footer: 余辉 Copyright © 2018
   <Bit/>
 </div> -->
 
+[![](https://travis-ci.org/AlvinMi/Developer-notes.svg?branch=dev)](https://travis-ci.org/AlvinMi/Developer-notes)
+
 <div class="features">
   <div class="feature">
     <h2>前端篇技术总结</h2>
@@ -27,9 +29,9 @@ footer: 余辉 Copyright © 2018
 
 ### 安装
 
-``` bash
+```bash
 # install
-yarn global add vuepress@next 
+yarn global add vuepress@next
 # OR npm install -g vuepress@next
 
 # create a markdown file
@@ -41,10 +43,10 @@ vuepress dev
 # build to static files
 vuepress build
 
-# npx 
+# npx
 npx vuepress dev docs
 
-# 使用 yarn 
+# 使用 yarn
 yarn dev
 
 yarn build
@@ -55,6 +57,7 @@ yarn build
 ```
 bash deploy.sh
 ```
+
 ::: warning COMPATIBILITY NOTE
 VuePress requires Node.js >= 8.
 :::
@@ -62,3 +65,5 @@ VuePress requires Node.js >= 8.
 遇到了 vuepress UnhandledPromiseRejectionWarning 警告，导致浏览器不能预览。
 
 - 参考： https://github.com/vuejs/vuepress/issues/1417
+
+后续采用 [Github+Vuepress+Travis](https://zhuanlan.zhihu.com/p/60129376)持续集成。
