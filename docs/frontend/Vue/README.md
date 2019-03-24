@@ -52,6 +52,11 @@ DOM 在 mounted 中就已经完成。
 beforecreate : 可以在这加个 loading 事件;
 
 ```
+
+#### 2.5.Vue-cli ?
+
+基于 webpack 构建，并带有合理的默认配置；
+
 ### 3.说说 Vue 和 Angular、ReactJS 的相同点和不同点？
 
 React 的相同点：

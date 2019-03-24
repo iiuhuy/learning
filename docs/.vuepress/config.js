@@ -121,7 +121,7 @@ module.exports = {
           '/frontend/Vue/',
           '/frontend/React/',
           '/frontend/Angular/',
-          '/frontend/Webpack/',
+          '/frontend/module-bundler/',
           '/frontend/MiniProgram/',
           '/frontend/nodejs/',
           '/frontend/Network/'

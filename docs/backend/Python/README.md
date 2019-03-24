@@ -1,6 +1,8 @@
 # Python 基础
 
-## 推荐使用 Anaconda 安装
+## 安装
+
+推荐使用 Anaconda 安装
 
 官网下载[安装脚本](https://www.anaconda.com/distribution/)，选择自己对应的操作系统([可以在这里](https://repo.anaconda.com/archive/)) 看到所有的版本，并且下载完成后使用 `md5sum 下载的文件.sh` 校验 MD5 值是否一致。
 
@@ -83,12 +85,6 @@ $ which virtualenv
 $ mkdir ~/.virtualenvs
 ```
 
-<!-- 现在就创建新的虚拟机：
-
-```zsh
-$ virtualenv
-``` -->
-
 ### 使用 virtualenv 创建项目
 
 创建一个该项目专用开发环境，假设命名为：myproject:
@@ -97,6 +93,11 @@ $ virtualenv
 $ virtualenv myproject
 # 激活该环境, 注意权限问题
 $ source ~/.virtualenvs/myproject/bin/activate
+
+# 退出虚拟环境
+$ deactivate
 ```
 
 就能安装其他的库了，例如 Djiango 等等...
+
+## Python 基础知识
