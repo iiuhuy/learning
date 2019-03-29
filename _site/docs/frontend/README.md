@@ -8,23 +8,7 @@
 
 ### 3.clientWidt、offsetWidth、scrollWidth 的区别？
 
-### 4.HTML 5 的新 API？
-
-- `<video>/<audio>`
-- Canvas
-- webGL
-- File API
-- App Cache
-- localStorage
-- IndexedDB
-- Drag & Drop
-- 高级的 DOM API、Fetch API 等等
-
 ## JavaScript
-
-闭包、IIFE、prototype 以及一些底层实现(ES、VO、AO)；
-熟悉常用的设计模式与 JavaScript 范式(比如实现类与私有属性)；
-ES6，包括 class、module、arrow function等等。
 
 ### 1.闭包？
 
@@ -259,8 +243,6 @@ apply,call,bind 的作用和区别？
 
 ### 17.为什么要使用模块化，有哪些实现模块化的方法？
 
-可能 Require.js/AMD 已经再见了，但是
-
 ### 18.什么是防抖、节流？ 怎么实现？
 
 ### 19.new 的原理是什么？怎么样实现一个 new？
@@ -415,27 +397,6 @@ float、clear 和 vertical-align
 
 ---
 
-## Canvas
-
-canvas 绘图先要获取绘图上下文：
-
-```js
-vat context = canvas.getContext('2d');
-```
-
-在 context 上调用各种函数绘制图形，比如：
-
-```js
-// 绘制左上角为 (0,0)，右下角为 (50,50) 的矩形
-context.fillRect(0, 0, 50, 50);
-```
-
-Canvas 的知识可以参考：
-
--
-
----
-
 ## 浏览器
 
 ### 1.一般看是不是浏览器 bug，就看不同浏览器表现是否相同。
@@ -552,6 +513,10 @@ Retina 常见问题
 ### 1.rem 移动端适配原理(rem 单位换算)？
 
 ---
+
+## 正则
+
+- 写写 demo, 匹配 email，3 的倍数，如果不知道正确的格式，那么怎么去知道正确的格式？
 
 ## 前端安全防范知识
 

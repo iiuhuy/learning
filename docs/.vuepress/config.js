@@ -83,6 +83,10 @@ module.exports = {
         //     link: './embedded/ROS'
         //   }
         // ]
+      },
+      {
+        text: '算法',
+        link: '/algorithm/index'
       }
     ],
 
@@ -118,13 +122,16 @@ module.exports = {
         // collapsable: false,
         children: [
           '/frontend/',
-          '/frontend/Vue/',
           '/frontend/React/',
+          '/frontend/Vue/',
           '/frontend/Angular/',
           '/frontend/module-bundler/',
           '/frontend/MiniProgram/',
           '/frontend/nodejs/',
-          '/frontend/Network/'
+          '/frontend/Performance/',
+          '/frontend/Network/',
+          '/frontend/WebGL/',
+          '/frontend/Regular/'
         ]
       },
       {
@@ -147,6 +154,12 @@ module.exports = {
           '/embedded/RaspberryPi',
           '/embedded/ai-iot',
           '/embedded/ROS'
+        ]
+      },
+      {
+        title: '算法',
+        children: [
+          '/algorithm/',
         ]
       }
     ]
