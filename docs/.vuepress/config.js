@@ -131,6 +131,7 @@ module.exports = {
           '/frontend/Performance/',
           '/frontend/Network/',
           '/frontend/WebGL/',
+          '/frontend/TypeScript/',
           '/frontend/Regular/'
         ]
       },

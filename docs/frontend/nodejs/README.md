@@ -8,3 +8,7 @@
 
 - [node.js 实现模块化源码学习](https://github.com/JiayiLi/node.js-module)
 - 《Node.js 来一打 C++ 扩展》
+
+## 资源整理
+
+- [Node.js 控制键盘鼠标相关包 #47](https://github.com/hax/hax.github.com/issues/47)
