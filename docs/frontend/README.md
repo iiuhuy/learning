@@ -10,15 +10,18 @@
 
 ### 4.HTML 5 的新 API？
 
-- `<video>/<audio>`
-- Canvas
-- webGL
-- File API
-- App Cache
-- localStorage
-- IndexedDB
-- Drag & Drop
-- 高级的 DOM API、Fetch API 等等
+[HTML5](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5)
+
+- 语义
+- 通信
+- 离线&储存
+- 多媒体
+- 2D/3D 绘图 & 效果
+- 性能 & 集成
+- 设备访问
+- 样式设计
+
+包括 音视频 `<video>/<audio>`、Canvas、WebGL、File API、App Cache、localStorage、IndexedDB、Drag & Drop、高级的 DOM API、Fetch API 等等...
 
 ## JavaScript
 
@@ -192,6 +195,10 @@ SPA 的一个重要实现就是改变路由时，页面不刷新。实现这个�
 - 易出错，需要使用程序管理前进、后退、地址栏等信息；
 - 较高的前端开发门槛，对技术能力要求较高，需要对设计模式有一定理解，因为面对不是一个简单的页面，而是一个运行在浏览器环境里面的桌面软件。
 
+#### 如何利用 history API 或者 hash 实现路由？
+
+#### history 与 hash 路由的区别？
+
 ### 13.[Fetch API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
 
 Fetch API 提供了一个获取资源的接口（包括跨域请求）。任何使用过 XMLHttpRequest 的人都能轻松上手，但新的 API 提供了更强大和灵活的功能集。
@@ -257,13 +264,199 @@ apply,call,bind 的作用和区别？
 
 ### 16.ES6 有哪些常用的功能？
 
+#### 16.1.ES6 的新特性考察
+
+
 ### 17.为什么要使用模块化，有哪些实现模块化的方法？
 
-- 
+- 1.Web sites are turning into Web apps
+- 2.Code complexity grows as the site gets bigger
+- 3.Assembly gets harder
+- 4.Developer wants discrete JS files/modules
+- 5.Deployment wants optimized code in just one or a few HTTP calls
 
-可能 Require.js/AMD 已经再见了，但是
+解决方案：
 
-> 参考：黄玄(huangxuan)的分享《JavaScript Modularization Seven Day》 来学习 JS 模块化的历史） https://huangxuan.me/js-module-7day
+- 1.Some sort of #include/import/require
+- 2.Ability to load nested dependencies
+- 3.Ease of use for developer but then backed by an optimization tool that helps deployment
+
+> 参考 require.js https://requirejs.org/docs/why.html
+
+模块化的方法：
+
+**匿名闭包：IIFE(立即执行函数表达式) 模式**
+
+```js
+var Module = (function() {
+  var _private = "safe now";
+  var foo = function() {
+    console.log(_private);
+  };
+
+  return {
+    foo: foo
+  };
+})();
+
+Module.foo();
+Module._private; // undefined
+```
+
+引入依赖，可以使用 jQuery：
+
+```js
+var Module = (function($) {
+  var _$body = $("body");
+  var foo = function() {
+    console.log(_$body);  // 特殊的方法
+  }
+
+  // Revelation Pattern
+  return {
+    foo: foo;
+  }
+})(jQuery)
+
+// use
+Module.foo();
+```
+
+**Script Loader**
+
+script 标签，一个项目可能会引入大量的 script tag，出现的问题：
+
+- 难以维护、依赖模糊、请求过多。
+
+解决方案：
+
+- [LABjs (Loading And Blocking JavaScript)](https://github.com/getify/LABjs)--(2009)
+
+它是如何使用的？
+
+```js
+<script src="LAB.js"></script>
+<script>
+  $LAB
+  .script("http://remote.tld/jquery.js").wait()
+  .script("/local/plugin1.jquery.js")
+  .script("/local/plugin2.jquery.js").wait()
+  .script("/local/init.js").wait(function(){
+      initMyPage();
+  });
+</script>
+```
+
+**[CommonJS](http://www.commonjs.org/)**
+
+模块的定义和引用：
+
+```js
+// math.js
+exports.add = function(a, b) {
+  return a + b;
+};
+
+// main.js
+var math = require("math"); // ./math in node
+console.log(math.add(1, 2)); // 3
+```
+
+NodeJS: Simple HTTP Server:
+
+```js
+// server.js
+var http = require("http"),
+  PORT = 8000;
+
+http
+  .createServer(function(req, res) {
+    res.end("Hello World");
+  })
+  .listen(PORT);
+
+console.log("listenning to " + PORT);
+```
+
+运行： `$ node server.js`。
+
+同步加载对服务器/本地环境并不问题，**浏览器环境才是问题！**。
+
+**AMD/CMD**
+
+浏览器环境模块化方案：
+
+- [AMD(Async Module Definition)](http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition),RequireJS 对模块定义的规范化产出。
+- [CMD(Common Module Definition)](https://github.com/cmdjs/specification/blob/master/draft/module.md),SeaJS 对模块定义的规范化产出。
+
+[RequireJS - AMD Implementation](http://requirejs.org/)，JavaScript file and module loader，It is optimized for in-browser use。
+
+
+AMD vs CMD - The truly different?
+
+```js
+// AMD recommended
+define(['a', 'b'], function(a, b){
+    a.doSomething();    // 依赖前置，提前执行
+    b.doSomething();
+})
+
+// CMD recommanded
+define(function(require, exports, module){
+    var a = require("a");
+    a.doSomething();
+    var b = require("b");
+    b.doSomething();    // 依赖就近，延迟执行
+})
+```
+
+Early Download, Lazy Executing.
+
+**Browserify/WebPack**
+
+npm Node Package Manager, 浏览器没有定义 require 方法，但是 Node.js 可以。
+
+使用 WebPack 模块打包工具，转换、构建、打包任何资源，可以使用各类插件。
+
+**ES6 Module**
+
+JavaScript 没有 Module，直到 ES6 支持了，但是没有运行时？
+
+所以需要使用 Babel，编译成 JavaScript 。
+
+```js
+// math.js
+export default math = {
+    PI: 3.14,
+    foo: function(){}
+}
+
+// app.js
+import math from "./math";
+math.PI
+
+# babel magic!
+$ babel-node app.js
+```
+
+Detail:
+
+- [ECMA-262/6.0/#Exports](http://www.ecma-international.org/ecma-262/6.0/#sec-exports)
+- [ECMA-262/6.0/#Imports](http://www.ecma-international.org/ecma-262/6.0/#sec-imports)
+
+Babel + Browser = Babelify,
+Babel + WebPack = Babel-Loader
+
+参考：
+
+- 1.[JavaScript 模块化七日谈](https://huangxuan.me/js-module-7day/#/) 学习 JS 模块化的历史；
+- 2.[前端模块化开发那点历史 #588](https://github.com/seajs/seajs/issues/588)。
+
+#### 17.1.为什么 ES 模块比 CommonJS 更好?(Why are ES modules better than CommonJS modules?)
+
+ES 模块是官方标准，也是 JavaScript 语言明确的发展方向，而 CommonJS 模块是一种特殊的传统格式，在 ES 模块被提出之前做为暂时的解决方案。 ES 模块允许进行静态分析，从而实现像 tree-shaking 的优化，并提供诸如循环引用和动态绑定等高级功能。
+
+可能 Require.js/AMD 已经再见了，但是 CommonJS 与 ES6 Modules 你必须要了解。
 
 ### 18.什么是防抖、节流？ 怎么实现？
 
@@ -271,11 +464,11 @@ apply,call,bind 的作用和区别？
 
 ### 20.异步?
 
-#### 20.1.Generator?
+#### 20.1.Generator 原理解释?
 
 你如何理解 Generator
 
-#### 20.2.Promise?
+#### 20.2.Promise 原理解释?
 
 Promise 是什么？
 Promise 的特点是什么，分别有什么优缺点？
@@ -284,15 +477,24 @@ Promise 的链式调用如何实现？
 Promise then 的第二个参数和 catch 的区别？
 手写一个 Promise？
 
-#### 20.3.async、await？
+#### 20.3.async、await 原理解释？
 
 async、await 的特点？
 优缺点?
 await 的原理是什么？
 
-### 21.如何转为数组？ arguments 是数组吗？
+### 21.Decorators(装饰器) in ES7?
 
-### 22.slice、substr、substring 的区别？
+ES7 的 decorator 概念是从 Python 借来的，在 Python 里，decorator 实际上是一个 wrapper，它作用于一个目标函数，对这个目标函数做一些额外的操作，然后返回一个新的函数。
+
+很久之前在网易音乐代码时间也听 [@hax]() 讲过 Decorators，
+
+### 22.如何转为数组？ arguments 是数组吗？
+
+### 23.slice、substr、substring 的区别？
+
+### 24.event-loop 和 macro-task、micro-task 的理解与应用举例？
+
 
 ---
 
@@ -419,30 +621,9 @@ float、clear 和 vertical-align
 
 ---
 
-## Canvas
-
-canvas 绘图先要获取绘图上下文：
-
-```js
-vat context = canvas.getContext('2d');
-```
-
-在 context 上调用各种函数绘制图形，比如：
-
-```js
-// 绘制左上角为 (0,0)，右下角为 (50,50) 的矩形
-context.fillRect(0, 0, 50, 50);
-```
-
-Canvas 的知识可以参考：
-
--
-
----
-
 ## 浏览器
 
-### 1.一般看是不是浏览器 bug，就看不同浏览器表现是否相同。
+### 1.一般看是不是浏览器 bug，就看不同浏览器表现是否相同。？
 
 ### 2.动态网站、静态网站的区别？
 
@@ -474,116 +655,13 @@ Canvas 的知识可以参考：
 
 > 参考：https://zhuanlan.zhihu.com/p/22817889
 
----
+### 3.对 GPU 渲染动画的理解？
 
-## 移动端适配
+### 4.浏览器缓存种类、区别与使用细节？
 
-> 最近看了很多移动适配的文章，还没消化，先积累着。搞懂移动端适配问题，先明白像素和视口。
+### 5.对几种状态维持方式的理解与使用细节考察？
 
-设备的像素？
-
-设备像素 (device pixel, dp): 又称为物理像素。单位 pt。pt 在 css 单位中属于真正的绝对单位，1pt = 1/72 (inch), inch 及英寸，而 1 英寸等于 2.54 厘米。所以设备像素的特点就是大小固定，不可变。比如 iPhone 5 的分辨率为 640 x 1136px.
-
-CSS 像素?
-
-在 CSS、JS 中使用的一个抽象的概念，单位是 px。
-
-> CSS 像素也可以称为设备独立像素 (device-independent pixels)，简称为 dips，单位是 dp。
-
-[DPI 计算/PPI 计算参考网站](https://www.sven.de/dpi/)
-
-#### 响应式参考
-
-```css
-/* 常用于图片流 */
-@media all and (max-width: 1690px) {
-  ...;
-}
-@media all and (max-width: 1280px) {
-  ...;
-}
-@media all and (max-width: 980px) {
-  ...;
-}
-@media all and (max-width: 736px) {
-  ...;
-}
-@media all and (max-width: 480px) {
-  ...;
-}
-
-/* 常用于稍微复杂的基本响应 */
-@media all and (min-width: 1200px) {
-  ...;
-}
-@media all and (min-width: 960px) and (max-width: 1199px) {
-  ...;
-}
-@media all and (min-width: 768px) and (max-width: 959px) {
-  ...;
-}
-@media all and (min-width: 480px) and (max-width: 767px) {
-  ...;
-}
-@media all and (max-width: 599px) {
-  ...;
-}
-@media all and (max-width: 479px) {
-  ...;
-}
-
-/* 基于Bootstrap 3.x 全球主流框架 */
-@media all and (max-width: 991px) {
-  ...;
-}
-@media all and (max-width: 768px) {
-  ...;
-}
-@media all and (max-width: 480px) {
-  ...;
-}
-
-/* 基于Bootstrap 4.x 全球主流框架 */
-@media all and (max-width: 1199px) {
-  ...;
-}
-@media all and (max-width: 991px) {
-  ...;
-}
-@media all and (max-width: 768px) {
-  ...;
-}
-@media all and (max-width: 575px) {
-  ...;
-}
-
-/* 基于 Material Design Lite (MDL) 材料设计框架 */
-@media all and (max-width: 1024px) {
-  ...;
-}
-@media all and (max-width: 839px) {
-  ...;
-}
-@media all and (max-width: 480px) {
-  ...;
-}
-
-/* 常用于Retina屏幕图片适配(@2x) */
-@media (-webkit-min-device-pixel-ratio: 1.5),
-  (min--moz-device-pixel-ratio: 1.5),
-  (-o-min-device-pixel-ratio: 3/2),
-  (min-resolution: 1.5dppx) {
-  ...;
-}
-```
-
-Retina 常见问题
-
-搭配基本的响应式断点，配合 http://imulus.github.io/retinajs/ 来控制 Retina 图片的显示效果。
-
-参考 Medium 英文博文：https://medium.com/@uiuxlab/the-most-used-responsive-breakpoints-in-2017-of-mine-9588e9bd3a8a
-
-### 1.rem 移动端适配原理(rem 单位换算)？
+### 6.浏览器渲染优化？
 
 ---
 

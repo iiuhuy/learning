@@ -42,7 +42,13 @@ Canvas 画一个矩形是很简单的，但是 WebGL 就不一样了。
 - [WebGL 高级编程：开发 Web 3D 图形]()
 - [WebGL 编程指南](), 目前再看(后面复杂的等用到的时候再翻出来详细查)。这本书的[英文版](https://www.amazon.com/WebGL-Programming-Guide-Interactive-Graphics/dp/0321902920/ref=sr_1_1?ie=UTF8&qid=1409015819&sr=8-1&keywords=webgl+programming+guide)
 
-### x.WebGL 如何使用 `<canvas>` 元素并在其上绘图？
+### 1.WebGL 程序(网页)软件结构？
+
+WebGL 程序使用三种语言开发：HTML、JavaScript 和 GLSL ES——然后由于着色器代码 GLSL ES 内嵌在 JavaScript 中，所以 WebGL 网页的文件结构和传统网页是一样的。
+
+### 2.WebGL 如何使用 `<canvas>` 元素并在其上绘图？
+
+#### 2.1.HTML 文件如何引入 WebGL JavaScript 文件？
 
 ### x.HTML 文件和用 JavaScript 编写的 WebGL 代码文件的连接？
 

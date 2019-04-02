@@ -147,13 +147,47 @@ module.exports = {
 
 ## [rollup](https://github.com/rollup/rollup)
 
-通常来说，打包 JavaScript 工具、库，推荐使用 rollup，打包 web 应用，推荐使用 webpack。
+通常来说，打包 JavaScript 工具、库，推荐使用 rollup，打包 web 应用，推荐使用 webpack,实际上很多前端流行的库都是使用 rollup 打包的，比如 React、Vue、Moment。
 
 rollup.js 有两个重要的特性，其中一个就是它使用 ES6 的模块标准，这意味着可以直接使用 import 和 export 而不需要引入 babel（当然，在现在的项目中，babel 可以说是必用的工具了）。
 
 - Tree Shaking： 自动移除未使用的代码，输出更小的文件(这个特性是基于 ES6 静态分析，只有 export 而没有 import 的变量不会被打包到最终代码中)；
 - Scope Hoisting：所有模块构建在一个函数内，执行效率更高；
 - Config 文件支持通过 ESM 模块格式书写；
+
+### 快速上手
+
+就像其他前端工具一样，我们可以通过 npm 全局安装 rollup，然后在命令行中使用它。
+
+```bash
+# 全局安装
+npm install -g rollup
+
+# 局部安装
+npm install --save-dev rollup
+# 如果使用局部安装可以使用 npx rollup -v 查看版本号
+```
+
+安装完成后，就可以使用 `rollup` 来打包了。
+
+新建一个名为 `rollup-demo` 的目录，进入该目录并且初始化
+
+```bash
+cd rollup-demo
+
+npm init
+# npm 会让你输入一些信息，直接回车。  或者 npm init -y
+```
+
+### 插件
+
+rollup 只提供打包的核心功能，如果你还想使用 babel 编译代码、压缩代码等功能，可以使用 rollup 社区提供的丰富插件，参考 [Awesome Rollup](https://github.com/rollup/awesome)。
+
+例如可以使用 rollup 的压缩插件 [rollup-plugin-uglify](https://github.com/TrySound/rollup-plugin-uglify) 来压缩代码。
+
+**参考**
+
+- [Building and publishing a module with TypeScript and Rollup.js](https://hackernoon.com/building-and-publishing-a-module-with-typescript-and-rollup-js-faa778c85396)
 
 ## 问题总结
 
@@ -180,3 +214,7 @@ rollup.js 有两个重要的特性，其中一个就是它使用 ES6 的模块�
 ### 7.webpack 热部署的原理？
 
 ### 8.webpack 打包速度过慢怎么办？
+
+### 9.如何评价 Webpack 2 新引入的 Tree-shaking 代码优化技术？
+
+知乎：https://www.zhihu.com/question/41922432

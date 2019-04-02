@@ -1,6 +1,6 @@
 # React
 
-### 1.React 里的 key 有什么用？
+### 1.react 的 key 的作用以及实现原理，并设定一个具体情境进行分析
 
 ### 2.React 里什么时候用 Context？
 
@@ -18,6 +18,21 @@ React 每个过程都提供一些钩子函数，让我们可以自定义一些�
 
 React 在有 Node 做中间层的时候比较适合做 SSR，另一方面需要看业务，如果网站需要 SEO，那么就需要做 SSR。后台系统、WebAPP 倒不需要 SSR。
 
+### 7.react 的 diff 算法基本原理与源码解释?
+
+### 8.如何细粒度地控制 react 组件更新?
+
+### 9.JS 的基本函数式使用，比如 reduce、curry?
+
+### 10.对 Redux 和 Mobx 的设计理念理解？
+
+### 11.virtual-dom 的基本原理与简单的源码解释？
+
+### 12.pure-component 和 shouldComponentUpdate 相关概念的考察？
+
+### 13.你认为 React 有什么应该 deprecate 的特性?
+
+### 14.你可以聊一聊怎么改良一个 React 的数据流 lib 吗? (哈哈哈，在知乎上看到这题。(ಥ_ಥ))
 
 
 ## React Redux

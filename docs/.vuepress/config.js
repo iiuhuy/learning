@@ -85,8 +85,8 @@ module.exports = {
         // ]
       },
       {
-        text: '算法',
-        link: '/algorithm/index'
+        text: '计算机基础',
+        link: '/computerbasic/index'
       }
     ],
 
@@ -129,7 +129,9 @@ module.exports = {
           '/frontend/MiniProgram/',
           '/frontend/nodejs/',
           '/frontend/Performance/',
+          '/frontend/mobileweb/',
           '/frontend/Network/',
+          '/frontend/WebGL/Canvas',
           '/frontend/WebGL/',
           '/frontend/TypeScript/',
           '/frontend/Regular/'
@@ -158,9 +160,9 @@ module.exports = {
         ]
       },
       {
-        title: '算法',
+        title: '计算机基础',
         children: [
-          '/algorithm/',
+          '/computerbasic/',
         ]
       }
     ]
