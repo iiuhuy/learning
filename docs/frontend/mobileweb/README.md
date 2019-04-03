@@ -31,10 +31,139 @@ and Hybrid 是什么？
 - Cocos2d
 - Egret(白鹭游戏引擎)
 
-
 ### 1.移动端的优化方式？
 
-### 2.移动端适配
+### 2.H5 页面如何实现多终端的适配？
+
+#### 2.1.vw 实现
+
+移动端布局，需要应对两个最为重要的问题：
+
+- 1.各终端下的适配问题；
+- 2.Retina 屏的细节处理。直接使用原生 CSS 来搞？
+
+使用 vw 实现移动端适配！`vm` 是基于 Viewport 视窗的长度单位，这里的视窗(Viewport),即浏览器可视化的区域。大小为 `window.innerWidth/window.innerHeight`。
+
+> 因为 Viewport 涉及到的知识点很多，要介绍清楚这方面的知识，都需要几篇文章来进行阐述。@PPK 大神有[两篇文章](https://www.quirksmode.org/mobile/viewports2.html)详细介绍了这方面的知识。中文可以移步[这里](https://www.w3cplus.com/css/viewports.html)进行阅读。
+
+在 [CSS Values and Units Module Level 3](https://www.w3.org/TR/css3-values/) 中和 Viewport 相关的单位有四个，分别为 vw、vh、vmin 和 vmax:
+
+- 1.vw: 是 `Viewport's width` 的简写，`1vw = window.innerWidth` 的 1%；
+- 2.vh: 是 `Viewport's height` 的简写， `1vh = window.innerHeight` 的 1%；
+- 3.vmin: vmin 的值是当前 vw 和 vh 中较小的值；
+- 4.vmax: vmax 的值是当前 vw 和 vh 中较大的值。
+
+> vmin 和 vmax 是根据 Viewport 中长度偏大的那个维度值计算出来的，如果 window.innerHeight > window.innerWidth 则 vmin 取百分之一的 window.innerWidth，vmax 取百分之一的 window.innerHeight 计算。
+
+750px 的设计稿，如果不计算的话，可以使用 PostCSS 插件 [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport), 可以在代码中直接写 px, 编译之后会自动转换成 vw。
+
+如果是 1125px, 可以修改 viewportWidth 的值，插件可以看 [官方使用文档](https://github.com/evrone/postcss-px-to-viewport)
+
+什么地方可以使用 `vw` 来适配我们的页面？
+
+- 1.容器适配
+- 2.文本的适配
+- 3.大于 1px 的边框、圆角、阴影
+- 4.内距和外距
+
+降级处理，如果有的机型不支持 `vw` 方案， 如果业务需要，应该如何处理？ 有两种方式可以进行降级处理：
+
+- 1.[CSS Houdini](https://github.com/w3c/css-houdini-drafts/wiki)： 通过 CSS Houdini 针对 `vw` 做处理，调用 [CSS Typed OM Level](https://www.w3.org/TR/css-typed-om-1) 提供的 [CSSUnitValue API](https://www.w3.org/TR/css-typed-om-1/#numericvalue-serialization)
+- 2.CSS Polyfill: 通过写相应 Polyfill 做相应的处理，目前针对 `vw` 单位的 Polyfill 主要有: [vminpoly](https://github.com/saabi/vminpoly)、[Viewport Units Buggyfill](https://github.com/rodneyrehm/viewport-units-buggyfill)、[vunits.js](https://gist.github.com/LeaVerou/1347501) 和 [Modernizr](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills)。大漠老师推荐 Viewport Units Buggyfill。
+
+**Viewport 不足之处**
+
+比如当容器使用 vw 单位，margin 采用 px 单位时，很容易造成整体宽度超过 100vw，从而影响布局效果。对于类似这样的现象，我们可以采用相关的技术进行规避。比如将 margin 换成 padding，并且配合 box-sizing。
+
+这不是最佳方案，随着将来浏览器或者应用自身的 Webview 对 calc() 函数的支持之后，碰到 vw 和 px 混合使用的时候，可以结合 calc() 函数一起使用，这样就可以完美的解决。
+
+可以使用下面工具 [CSS3-test](https://css3test.com/), 或者直接扫二维码。
+
+<img src="https://raw.githubusercontent.com/AlvinMi/2019-Pic/master/2019/20190403202814.png"/>
+
+vw 方案和 Flexbox 方案区别？
+
+Flexible 的设计原理来源于 Viewport 单位的思路。通过 JS 来判断，动态修改 meta 的值。而 vw 是浏览器客户端原生支持的特性，不需要依赖 JS 来做任何的判断和计算。这是两者最大的差异。
+
+Flexble 已完成历史使命，拥抱新变化。
+
+技术方案这东西，没有绝对的。
+
+参考：
+
+- [使用 Flexible 实现手淘 H5 页面的终端适配 @大漠老师](https://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html)
+- [amfe/lib-flexble](https://github.com/amfe/lib-flexible)
+- [终端设备的参数](https://material.io/tools/devices/)。
+- [苹果手机分辨率指南](https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions)。
+
+实践一下： [如何在 Vue 项目中使用 vw 实现移动端适配](https://www.w3cplus.com/mobile/vw-layout-in-vue.html)
+
+安装 [VueCLI](https://cli.vuejs.org/)，使用 yarn。
+
+```bash
+npm install -g @vue/cli
+# OR
+yarn global add @vue/cli
+```
+
+如果安装后出现
+
+```bash
+$ vue --version
+zsh: command not found: vue
+```
+
+如要添加环境到 `.zshrc`：
+
+```bash
+$ yarn global bin
+/home/alvinmi/.yarn/bin
+$ echo 'export PATH="/home/alvinmi/.yarn/bin:$PATH"' >> ~/.zshrc
+$ source ~/.zshrc
+$ vue --version
+3.5.5
+```
+
+新建一个项目:
+
+```bash
+$ vue init webpack vw-layout
+  Command vue init requires a global addon to be installed.
+  Please run yarn global add @vue/cli-init and try again.
+$ yarn global add @vue/cli-init
+$ vue init webpack vw-layout
+# 选择相应的配置就行
+$ cd vw-layout
+$ npm run dev
+```
+
+通过 http://localhost:8082 ，就能访问项目的初始化项目。
+
+通过 `Vue-CLI` 构建的项目，在项目的根目录下有一个 `.postcssrc.js` 的配置文件，默认就有。
+
+```js
+// https://github.com/michael-ciniawsky/postcss-load-config
+module.exports = {
+  plugins: {
+    "postcss-import": {},
+    "postcss-url": {},
+    // to edit target browsers: use "browserslist" field in package.json
+    autoprefixer: {}
+  }
+};
+```
+
+- [postcss-import](https://github.com/postcss/postcss-import), 主要功能是解决 `@import` 引入路径问题。使用这个插件很容易使用本地文件、`node_modules` 或者 `web_modules` 文件，配置 `postcss-url` 引入文件变得更轻松。
+- [postcss-url](https://github.com/postcss/postcss-url), 主要用来处理文件，如图片文件、字体文件等引用路径的处理，vue 中 `vue-loader` 已具有类似的功能，只需要配置中将 `vue-loader` 配置进去。
+- [autoprefixer](https://github.com/postcss/autoprefixer), 用来自动处理浏览器前缀的一个插件。
+
+上面三个是 `Vue CLI`,
+
+[DEMO]()
+
+扫一扫下面的二维码
+
+#### 2.2.移动端适配 rem 方案
 
 > 最近看了很多移动适配的文章，还没消化，先积累着。搞懂移动端适配问题，先明白像素和视口。
 
@@ -49,6 +178,12 @@ CSS 像素?
 > CSS 像素也可以称为设备独立像素 (device-independent pixels)，简称为 dips，单位是 dp。
 
 [DPI 计算/PPI 计算参考网站](https://www.sven.de/dpi/)
+
+- [简单粗暴的移动端适配方案](https://imweb.io/topic/5a523cc0a192c3b460fce3a5)
+
+哈哈哈。会不会有 rem & vw 混用的呢？
+
+#### 2.3.px 单位和媒体查询，flex 布局的方式？
 
 #### 响应式参考
 
@@ -143,4 +278,4 @@ Retina 常见问题
 
 #### 2.1.rem 移动端适配原理(rem 单位换算)？
 
-### 3.webp 图片的浏览器兼容检测？
+### 4.webp 图片的浏览器兼容检测？

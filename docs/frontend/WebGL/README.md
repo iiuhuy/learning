@@ -1,6 +1,14 @@
 # WebGL
 
-## WebGL 技术储备
+WebGL 技术储备。
+
+### WebGL demo
+
+- 
+
+### 入门初级知识
+
+- [WebGL Fundamentals](https://webglfundamentals.org/) & https://zhuanlan.zhihu.com/p/47454989,简体翻译是一个人。
 
 参考:
 
@@ -131,4 +139,17 @@ WebGL 被 Chrome、Firefox、Safari、Opera 浏览器支持。
 - 斜体*Italic*——函数参数名、或引用名、程序名或文件名；
 - Monospace 字体——实例代码、方法、函数、变量、命令行选项、JavaScript 对象名称、HTML 标签名称。
 
-###
+### 什么是 GPGPU? 只有 example，木有资料？
+
+- https://github.com/keijiro/Firefly
+
+## 进阶
+
+- WebGL-Next
+- WebGL-insight
+
+## 需要补一些图形学的知识
+
+- 图形学基本原理和进阶原理
+
+[图形学](http://mecg.me/wiki/doku.php?id=cg:index)

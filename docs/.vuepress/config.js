@@ -7,6 +7,10 @@ module.exports = {
   description: '日常开发技术总结笔记，技术答疑！',
   repo: 'AlvinMi/Developer-notes',
   repoLabel: '查看源码',
+  // head: [
+  //   ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css' }],
+  //   ['link', { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css" }],
+  // ],
   markdown: {
     lineNumbers: true
   },
@@ -144,7 +148,7 @@ module.exports = {
           // Python
           '/backend/Python/',
           '/backend/Python/Django',
-          '/backend/Python/flask'
+          '/backend/Python/flask',
           // Java
           
         ]
@@ -163,6 +167,7 @@ module.exports = {
         title: '计算机基础',
         children: [
           '/computerbasic/',
+          '/computerbasic/linear_algebra'
         ]
       }
     ]

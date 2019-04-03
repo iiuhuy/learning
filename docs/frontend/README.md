@@ -266,7 +266,6 @@ apply,call,bind 的作用和区别？
 
 #### 16.1.ES6 的新特性考察
 
-
 ### 17.为什么要使用模块化，有哪些实现模块化的方法？
 
 - 1.Web sites are turning into Web apps
@@ -391,23 +390,22 @@ console.log("listenning to " + PORT);
 
 [RequireJS - AMD Implementation](http://requirejs.org/)，JavaScript file and module loader，It is optimized for in-browser use。
 
-
 AMD vs CMD - The truly different?
 
 ```js
 // AMD recommended
-define(['a', 'b'], function(a, b){
-    a.doSomething();    // 依赖前置，提前执行
-    b.doSomething();
-})
+define(["a", "b"], function(a, b) {
+  a.doSomething(); // 依赖前置，提前执行
+  b.doSomething();
+});
 
 // CMD recommanded
-define(function(require, exports, module){
-    var a = require("a");
-    a.doSomething();
-    var b = require("b");
-    b.doSomething();    // 依赖就近，延迟执行
-})
+define(function(require, exports, module) {
+  var a = require("a");
+  a.doSomething();
+  var b = require("b");
+  b.doSomething(); // 依赖就近，延迟执行
+});
 ```
 
 Early Download, Lazy Executing.
@@ -485,9 +483,11 @@ await 的原理是什么？
 
 ### 21.Decorators(装饰器) in ES7?
 
-ES7 的 decorator 概念是从 Python 借来的，在 Python 里，decorator 实际上是一个 wrapper，它作用于一个目标函数，对这个目标函数做一些额外的操作，然后返回一个新的函数。
+ES7 的 Decorator 概念是从 Python 借来的，在 Python 里， Decorator 实际上是一个 wrapper，它作用于一个目标函数，对这个目标函数做一些额外的操作，然后返回一个新的函数。
 
-很久之前在网易音乐代码时间也听 [@hax]() 讲过 Decorators，
+Decorator 让我们有机会在代码的执行期间改变其行为，可以装饰的对象包括: 类、属性、方法。可以理解成就是包装对象，返回一个新的对象描述(descriptor)。
+
+具体的使用场景，可以搜一下 Decorator 的使用场景。
 
 ### 22.如何转为数组？ arguments 是数组吗？
 
@@ -495,6 +495,15 @@ ES7 的 decorator 概念是从 Python 借来的，在 Python 里，decorator 实
 
 ### 24.event-loop 和 macro-task、micro-task 的理解与应用举例？
 
+### 25.关于 [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#Description)?
+
+`defineProperty` 所做的事情就是为一个对象增加新的属性，或者更改对象某个已存在的属性,再返回这个对象。
+
+接受三个参数 `Object.defineProperty (obj, prop, descriptor)`, 分别是：
+
+- 1.obj: 目标对象
+- 2.prop: 属性名
+- 3.descriptor: 针对该属性的描述符
 
 ---
 
