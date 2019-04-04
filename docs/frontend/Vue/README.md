@@ -136,7 +136,11 @@ React 不同点(区别)：
 
 ### 18.diff 算法?
 
-## CSS 命名规范
+### 19.Vue 处理静态资源？
+
+从相对路径导入，引用静态资源时，该资源会被包含进入 Webpack 的依赖图中，在内部通过 `file-loader` 用版本哈希值和正确的公共基础路径来决定最终的文件路径，再用 `url-loader` 将小于 4kb 的资源内联，以减少 HTTP 请求的数量。可以设置 [chainWebpack](https://cli.vuejs.org/zh/config/#chainwebpack) 调整内联文件大小限制。
+
+## Vue CSS 命名规范
 
 Vue 组件的 CSS 命名规范。
 

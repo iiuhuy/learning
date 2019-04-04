@@ -93,7 +93,8 @@ Flexble 已完成历史使命，拥抱新变化。
 
 - [使用 Flexible 实现手淘 H5 页面的终端适配 @大漠老师](https://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html)
 - [amfe/lib-flexble](https://github.com/amfe/lib-flexible)
-- [终端设备的参数](https://material.io/tools/devices/)。
+- [再谈 Retina 下 1px 的解决方案](https://www.w3cplus.com/css/fix-1px-for-retina.html)
+- [终端设备的参数](https://material.io/tools/devices/)
 - [苹果手机分辨率指南](https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions)。
 
 实践一下： [如何在 Vue 项目中使用 vw 实现移动端适配](https://www.w3cplus.com/mobile/vw-layout-in-vue.html)
@@ -157,7 +158,68 @@ module.exports = {
 - [postcss-url](https://github.com/postcss/postcss-url), 主要用来处理文件，如图片文件、字体文件等引用路径的处理，vue 中 `vue-loader` 已具有类似的功能，只需要配置中将 `vue-loader` 配置进去。
 - [autoprefixer](https://github.com/postcss/autoprefixer), 用来自动处理浏览器前缀的一个插件。
 
-上面三个是 `Vue CLI`,
+上面三个是 `Vue CLI` 默认就配置了的 PostCSS 插件，完成 `vw` 的布局兼容方案，还需要配置下面的几个 PostCSS 插件：
+
+- [postcss-aspect-ratio-mini](https://github.com/yisibl/postcss-aspect-ratio-mini)
+- [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport)
+- [postcss-write-svg](https://github.com/jonathantneal/postcss-write-svg)
+- [postcss-cssnext](https://github.com/MoOx/postcss-cssnext)
+- [cssnano](https://github.com/ben-eb/cssnano)
+
+```bash
+npm i postcss-aspect-ratio-mini postcss-px-to-viewport postcss-write-svg postcss-cssnext postcss-viewport-units cssnano --S
+
+# 或者 yarn
+yarn add postcss-aspect-ratio-mini postcss-px-to-viewport postcss-write-svg postcss-cssnext postcss-viewport-units cssnano --S
+```
+
+查看依赖包：
+
+```json
+"dependencies": {
+    "cssnano": "^4.1.10",
+    "postcss-aspect-ratio-mini": "^1.0.1",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-px-to-viewport": "^1.1.0",
+    "postcss-viewport-units": "^0.1.6",
+    "postcss-write-svg": "^3.0.1",
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1"
+  },
+```
+
+配置 `.postcssrc.js` 文件，对新安装的 PostCSS 插件进行配置：
+
+```js
+module.exports = {
+  plugins: {
+    "postcss-import": {},
+    "postcss-url": {},
+    // to edit target browsers: use "browserslist" field in package.json
+    // "autoprefixer": {},
+    "postcss-aspect-ratio-mini": {},
+    "postcss-write-svg": {
+      utf8: false
+    },
+    "postcss-cssnext": {},
+    "postcss-px-to-viewport": {
+      viewportWidth: 750,
+      viewportHeight: 1334,
+      unitPrecision: 3,
+      viewportUnit: "vw",
+      selectorBlackList: [".ignore", ".hairlines"],
+      minPixelValue: 1,
+      mediaQuery: false
+    },
+    "postcss-viewport-units": {},
+    cssnano: {
+      preset: "advanced",
+      autoprefixer: false,
+      "postcss-zindex": false
+    }
+  }
+};
+```
 
 [DEMO]()
 

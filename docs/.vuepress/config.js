@@ -7,17 +7,29 @@ module.exports = {
   description: '日常开发技术总结笔记，技术答疑！',
   repo: 'AlvinMi/Developer-notes',
   repoLabel: '查看源码',
-  // head: [
-  //   ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css' }],
-  //   ['link', { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css" }],
-  // ],
+  head: [
+    ['link', {
+      rel: 'stylesheet',
+      href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css'
+    }],
+    ['link', {
+      rel: "stylesheet",
+      href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css"
+    }],
+  ],
   markdown: {
-    lineNumbers: true
+    lineNumbers: true,
+    anchor: { permalink: false },
+    toc: { includeLevel: [1, 2, 3, 4] },
+    config: md => {
+      md.use(require("markdown-it-katex"));
+    }
   },
   themeConfig: {
     // ------ 导航栏 ----- //
     // 禁用导航栏
     // navbar: false,
+    
     nav: [{
         text: 'Home',
         link: '/'
@@ -57,18 +69,6 @@ module.exports = {
       {
         text: '后端',
         link: '/backend/index'
-        // items: [{
-        //     text: '基础',
-        //     link: './backend/index'
-        //   }, {
-        //     text: 'Java',
-        //     link: ''
-        //   },
-        //   {
-        //     text: 'Python',
-        //     link: ''
-        //   }
-        // ]
       },
       // 嵌入式
       {
@@ -150,7 +150,7 @@ module.exports = {
           '/backend/Python/Django',
           '/backend/Python/flask',
           // Java
-          
+
         ]
       },
       {
@@ -167,7 +167,8 @@ module.exports = {
         title: '计算机基础',
         children: [
           '/computerbasic/',
-          '/computerbasic/linear_algebra'
+          '/computerbasic/linear_algebra',
+          '/computerbasic/Advanced_Mathematics'
         ]
       }
     ]

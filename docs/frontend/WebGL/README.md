@@ -4,7 +4,7 @@ WebGL 技术储备。
 
 ### WebGL demo
 
-- 
+-
 
 ### 入门初级知识
 
@@ -153,3 +153,4 @@ WebGL 被 Chrome、Firefox、Safari、Opera 浏览器支持。
 - 图形学基本原理和进阶原理
 
 [图形学](http://mecg.me/wiki/doku.php?id=cg:index)
+

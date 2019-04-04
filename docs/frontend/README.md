@@ -505,6 +505,10 @@ Decorator 让我们有机会在代码的执行期间改变其行为，可以装�
 - 2.prop: 属性名
 - 3.descriptor: 针对该属性的描述符
 
+### 26.ES6 中 Proxy 的 getPrototypeOf 陷阱是怎么回事？
+
+- [ES6 中 Proxy 的 getPrototypeOf 陷阱是怎么回事？](https://www.zhihu.com/question/317137493)
+
 ---
 
 ## CSS

@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "vuepress": "^0.14.10"
+  },
+  "dependencies": {
+    "markdown-it-katex": "^2.0.3"
   }
 }
