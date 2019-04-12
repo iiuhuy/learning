@@ -141,6 +141,50 @@ module.exports = {
 };
 ```
 
+#### 7.`webpack-dev-server`是怎么跑起来的？
+
+#### 8.抽取公共文件是怎么配置的？
+
+多页面抽取公共文件的配置方法： 
+
+在 optimization -> cacheGroup -> common 下进行配置
+
+#### 9.如何处理安全问题？
+
+这个是自己在 sideProj 中出现的, 如下，然后发现是 `webpack-dev-server` 导致的。
+
+<img src="https://raw.githubusercontent.com/AlvinMi/2019-Pic/master/2019/20190409165254.png"/>
+
+同时在 [uber/deck.gl](https://github.com/uber/deck.gl/issues/2558)，也看大这个 issues。
+
+#### 10.import {Button} from 'antd', 打包的时候只打包 button，分模块加载是如何做到的？
+
+#### 11.使用 import 时，webpack 对 node_modules 里的依赖会做什么？
+
+#### 12.Webpack 生命周期？
+
+#### 13.常用的 plugins？
+
+#### 14.一般怎么组织 CSS？
+
+CSS webpack
+
+#### 15.如何去除 URL 中的 `#` 号？
+
+#### 16.和 gulp 的区别？
+
+#### 17.如何实现异步加载？
+
+#### 18.如何实现分模块打包(多个入口)？
+
+#### 20.打包时的 Hash 码是如何生成的？
+
+##### 20.1.Hash 码存在相同的情况如何避免？
+
+#### 21.
+
+---
+
 ### Webpack4.0
 
 ## gulp

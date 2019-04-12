@@ -140,6 +140,28 @@ React 不同点(区别)：
 
 从相对路径导入，引用静态资源时，该资源会被包含进入 Webpack 的依赖图中，在内部通过 `file-loader` 用版本哈希值和正确的公共基础路径来决定最终的文件路径，再用 `url-loader` 将小于 4kb 的资源内联，以减少 HTTP 请求的数量。可以设置 [chainWebpack](https://cli.vuejs.org/zh/config/#chainwebpack) 调整内联文件大小限制。
 
+### 20.vue-keep-alive?
+
+Vue 实现页面缓存：
+
+```js
+// keep-alive
+<keep-alive>
+  <router-view v-if="isLoginAndKeepAlive" class="site-main"/>
+</keep-live>
+// 如果只需要从某些页面过来的才缓存当前页面的数据，可以下面这样进行设置
+beforeRouteEnter (to, from, next) {
+  // 从详情页过来的话当前页被缓存，其它页面过来则不缓存
+  to.meta.keepAlive = false
+  if (from.path === '/statistics/detail') {
+    to.meta.keepAlive = true
+  }
+  next()
+}
+```
+
+`keep-alive` 有一点副作用，如数据变更的话，需要做相应的调整，参考[vue 中前进刷新、后退缓存用户浏览数据和浏览位置的实践](https://juejin.im/post/5b2ce07ce51d45588a7dbf76)。
+
 ## Vue CSS 命名规范
 
 Vue 组件的 CSS 命名规范。

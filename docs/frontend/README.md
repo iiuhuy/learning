@@ -171,6 +171,37 @@ JSONP 通过 `<script>` 标签发送跨域请求，通常使用 callback 查询�
 
 为了标准化跨域请求流程，W3C 提出了[跨域资源共享](http://www.ruanyifeng.com/blog/2016/04/cors.html)（Cross-origin resource sharing，简称 CORS）标准，在 CORS 出现之前，通常是使用 [JSONP](https://www.zhihu.com/question/19966531) 来取巧地解决跨域问题，但由于 JSONP 存在各种限制，因此在支持 CORS 的浏览器中（IE10 以下不支持）还是推荐使用 CORS。
 
+#### 11.1.跨域之 CORS
+
+原理： 服务器设置 `Access-Control-Allow-OriginHTTP` 响应头之后，浏览器会允许跨域请求
+
+限制： 浏览器要支持 HTML5，支持 GET、POST、PUT、DELETE 等方法
+
+服务器配置：
+
+可以设置一个白名单：
+
+```js
+// node.js -> 跨域白名单
+whiteOrigins: ["http://localhost:8080", "http://www.x.top", "http://www.x.xyz"];
+```
+
+设置 `response.header`:
+
+```js
+// 跨域支持
+app.all('/api/#', (req, res, next) => {
+  const origin = req.headers.origin;
+  if(config.whiteOrigins.indexOf(origin) !== -1) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, token' );
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS, DELETE');
+  }
+  next()；
+})
+```
+
 ### 12.什么是单页应用？
 
 单页应用的全称是 single-page application，简称 SPA，它是一种网站应用的模型，它可以动态重写当前的页面来与用户交互，而不需要重新加载整个页面。
@@ -672,9 +703,11 @@ float、clear 和 vertical-align
 
 ### 4.浏览器缓存种类、区别与使用细节？
 
-### 5.对几种状态维持方式的理解与使用细节考察？
+### 5.浏览器缓存策略？
 
-### 6.浏览器渲染优化？
+### 6.对几种状态维持方式的理解与使用细节考察？
+
+### 7.浏览器渲染优化？
 
 ---
 
