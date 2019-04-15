@@ -137,6 +137,7 @@ module.exports = {
           '/frontend/Network/',
           '/frontend/WebGL/Canvas',
           '/frontend/WebGL/',
+          '/frontend/WebGL/GLSL',
           '/frontend/TypeScript/',
           '/frontend/Regular/'
         ]

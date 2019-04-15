@@ -62,8 +62,15 @@ bash deploy.sh
 VuePress requires Node.js >= 8.
 :::
 
-遇到了 vuepress UnhandledPromiseRejectionWarning 警告，导致浏览器不能预览。
+后续采用 [Github+Vuepress+Travis](https://zhuanlan.zhihu.com/p/60129376)持续集成。
+
+### 可能遇到的坑
+
+1.遇到了 vuepress UnhandledPromiseRejectionWarning 警告，导致浏览器不能预览。
 
 - 参考： https://github.com/vuejs/vuepress/issues/1417
 
-后续采用 [Github+Vuepress+Travis](https://zhuanlan.zhihu.com/p/60129376)持续集成。
+
+2.`Error: watch xxx/docs ENOSPC` 这个错误
+
+- 
