@@ -105,6 +105,10 @@ mounted(载入后) 这几个钩子。
 
 **beforeCreate、created** 之间，进行初始化事件，watch 数据，在 `created` 的时候数据已经和 `data` 进行绑定(即放在 `data` 中的属性当值发生改变的同时，视图也会改变)，还没有 `el` 选项。
 
+**created、beforeMount** 之间：
+
+- 先判断对象是否有 `el` 选项。如没有则停止编译，直到 Vue 实例上调用 `vm.$mount(el)`
+- 
 
 #### 2.3.DOM 渲染在哪个生命周期就已经完成？
 
@@ -148,7 +152,13 @@ React 不同点(区别)：
 - 官方文档：[组件基础](https://cn.vuejs.org/v2/guide/components.html#data-%E5%BF%85%E9%A1%BB%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0) 和 [api-data](https://cn.vuejs.org/v2/api/#data);
 - [Vue 组件为什么必须是函数？](https://zhuanlan.zhihu.com/p/30332205)
 
-### 5.Vue Router 中 query 和 param 的区别？
+### 5.Vue 的路由实现：hash 模式 和 history 模式?
+
+- `hash` 模式： 在浏览器中符号 `#`，`#` 以及 `#`后面的字符称为 `hash`，使用 `window.location.hash` 读取。
+
+#### 5.1.Vue Router 中 query 和 param 的区别？
+
+#### 5.2.嵌套路由？
 
 ### 6.`v-if` 和 `v-show` 指令有什么区别？
 

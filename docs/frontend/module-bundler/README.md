@@ -95,7 +95,9 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 
 设置了之后就不会报这个警告了。
 
-#### 6.Loader 是什么？
+#### 6.Loader，plugin 的区别，如何使用？
+
+##### Loader 是什么？
 
 loader 的执行顺序：从下至上、从右到左。
 

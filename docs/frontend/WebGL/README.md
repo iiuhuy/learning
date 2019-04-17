@@ -182,6 +182,16 @@ WebGL 程序使用三种语言开发：HTML、JavaScript 和 GLSL ES——然后
 
 ### 3.HTML 文件和用 JavaScript 编写的 WebGL 代码文件的连接？
 
+...
+
+将位置信息从 JavaScript 传递给顶点着色器：
+
+- Attribute 变量， 传输与顶点相关的数据；
+- Uniform 变量， 传输对于所有顶点都相同(或者与顶点无关的数据)。
+
+使用哪一个变量取决于需要传输的数据本身。
+
+
 ### 4.简单的 WebGL 绘图函数？
 
 绘制一个点，原点(0.0, 0.0, 0.0)处就在 canvas 的中心位置。开始只将了用矩形画一个点，第十章中提到了画一个圆点。
@@ -243,6 +253,8 @@ WebGL 程序使用三种语言开发：HTML、JavaScript 和 GLSL ES——然后
 ...
 
 ### x.WebGL 为什么无须像 OpenGL 那样交换缓冲区？
+
+> 《WebGL 编程指南》- 附录 WebGL 为什么不需要交换缓冲区。
 
 ### GLSL ES 1.0 内置函数
 

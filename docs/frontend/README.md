@@ -661,6 +661,11 @@ float、clear 和 vertical-align
 
 > 参考： https://yanhaijing.com/css/2018/01/17/horizontal-vertical-center/
 
+### 4.经典的布局？
+
+### 5.position，文档流的了解？
+
+
 ### x.Privacy and the :visited selector?
 
 ---
@@ -699,7 +704,9 @@ float、clear 和 vertical-align
 
 > 参考：https://zhuanlan.zhihu.com/p/22817889
 
-### 3.对 GPU 渲染动画的理解？
+### 3.DOM 结构、重绘、重排？
+
+### 4.对 GPU 渲染动画的理解？
 
 ### 4.浏览器缓存种类、区别与使用细节？
 
@@ -708,6 +715,26 @@ float、clear 和 vertical-align
 ### 6.对几种状态维持方式的理解与使用细节考察？
 
 ### 7.浏览器渲染优化？
+
+### 8.浏览器的 16ms 渲染帧？
+
+大多数屏幕刷新率为 60Hz 即 60 次/秒，所以通常情况下 FPS 为 frame/s 时动画效果最好，这样可以知道每帧刷新的时间约要 16 ms。
+
+Chrome 中调试工具是可以直接看到的，如下图:
+
+<img src="https://raw.githubusercontent.com/AlvinMi/2019-Pic/master/2019/20190416023919.png"/>
+
+不过缺点多，并不能精准的收集数据。
+
+可以借助 `Frame Timing API`.
+
+[Blink 内核](https://chromium.googlesource.com/chromium/blink/)
+
+>参考:https://harttle.land/2017/08/15/browser-render-frame.html?utm_source=tuicool&utm_medium=referral?utm_source=tuicool&utm_medium=referral
+
+### 9.cookie, local storage,session storage 定义，区别？
+
+
 
 ---
 
@@ -719,7 +746,7 @@ float、clear 和 vertical-align
 
 ### 3.CSRF？
 
-### 4.rAF
+### 4.rAF？
 
 ### 5.CSP？
 
