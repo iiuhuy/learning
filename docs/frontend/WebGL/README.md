@@ -191,6 +191,15 @@ WebGL 程序使用三种语言开发：HTML、JavaScript 和 GLSL ES——然后
 
 使用哪一个变量取决于需要传输的数据本身。
 
+使用 Attribute 变量，实例程序需要包含的步骤,一般如下:
+
+- 1.在顶点着色器中，声明 Attribute 变量；
+- 2.将 Attribute 变量赋值给 gl_Position 变量；
+- 3.向 Attribute 变量传输数据。
+
+Attribute 这个关键词被称为**储存限定符**(storage qualifier), Attribute 变量必须声明为全局变量，数据将从外部传给该变量。格式如：`<储存限定符>` `<类型>` `<变量名>`。
+
+一个约定，所有 Attribute 变量声明都是以 `a_` 开头, Uniform 变量都以 `u_` 开头，这点和 C 语言很像。
 
 ### 4.简单的 WebGL 绘图函数？
 
@@ -333,3 +342,38 @@ Map 是 Textture 的容器，定义了纹理如何被 3D 物体使用。
 ## 过程踩坑
 
 ### 1.
+
+...
+
+## 一些函数的规范
+
+书中介绍的一些函数(WebGL API 接口)，是可以直接查文档的，为了加深印象，自己还是多少写一写。
+
+**gl.getAttribLocation()**
+
+```js
+gl.getAttribLocation(program, name);
+
+/**
+ * @func gl.getAttribLocation(program, name)
+ * @desc 获取由 name 参数指定 attribute 变量的储存地址
+ * @param {object} program - 参数 program 指定包含顶点着色器和片元着色器的着色器程序对象
+ * @param {string} name    - 指定想要获取其储存地址 attribute 变量的名称
+ * @returns {number} 
+ *          返回大于或等于0  - Attribute 变量的储存地址
+ *          返回-1         - 指定的 Attribute 变量不存在，或者其命名具有 gl_ 或者 webgl_ 前缀
+ */
+
+```
+
+**gl.vertexAttrib3f(a_Position, v0, v1, v2);**
+
+```js
+/**
+ * @func gl.vertexAttrib3f(location, v0, v1, v2)
+ * @desc 将数据(v0,v1,v2) 传给由 location 参数指定的 Attribute 变量
+ * @param {GLuint} location - 指定将要修改顶点 Attribute 变量的存储位置。
+ * @param {float number} v0～v3  - 设置顶点 attibute 变量的各分量值
+ * @returns null
+ */
+```

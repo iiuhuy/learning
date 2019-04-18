@@ -4,10 +4,11 @@
 
 ### Ubuntu 环境
 
+### MacOS 环境
+
 参考
 
 - [官方文档](https://facebook.github.io/react-native/) & [React Native 中文文档](https://reactnative.cn/)
-
 
 ## 一些参考文章
 
