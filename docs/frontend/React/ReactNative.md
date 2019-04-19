@@ -2,11 +2,16 @@
 
 ## React Native 开发环境搭建
 
-### Ubuntu 环境
+> 可以参考React Native 中文网：https://reactnative.cn/docs/getting-started.html
+
 
 ### MacOS 环境
 
-参考
+### Ubuntu 环境
+
+### Windows 环境
+
+参考文档：
 
 - [官方文档](https://facebook.github.io/react-native/) & [React Native 中文文档](https://reactnative.cn/)
 
