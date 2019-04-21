@@ -127,6 +127,7 @@ module.exports = {
         children: [
           '/frontend/',
           '/frontend/React/',
+          '/frontend/React/ReactNative',
           '/frontend/Vue/',
           '/frontend/Angular/',
           '/frontend/module-bundler/',

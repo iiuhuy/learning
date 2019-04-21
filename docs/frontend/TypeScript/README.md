@@ -77,4 +77,24 @@ console.log("Hello TypeScript!!!");
 
 最基本最简单的环境就这么搭建完成了。
 
-> 参考： 
+> 参考： https://zhuanlan.zhihu.com/p/60231115
+
+## 常见的[类型](http://www.typescriptlang.org/docs/handbook/basic-types.html)
+
+在 JSDoc 中，使用 `/**@type**/`注释来标记类型, 基本类型有：
+
+类型 | 布尔值 | 数字 | 字符串 | 数组 | 元组 | 枚举 | 
+---- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+TypeScript| Boolean | Number | String | Array | Tuple | Enum | Any | Void | Null and Undefined | Never | Object|
+
+### Boolean
+### Number
+### String
+### Array
+### Tuple
+### Enum
+### Any
+### Void
+### Null and Undefined
+### Never
+### Object
