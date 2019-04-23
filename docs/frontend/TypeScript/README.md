@@ -83,18 +83,28 @@ console.log("Hello TypeScript!!!");
 
 在 JSDoc 中，使用 `/**@type**/`注释来标记类型, 基本类型有：
 
-类型 | 布尔值 | 数字 | 字符串 | 数组 | 元组 | 枚举 | 
----- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-TypeScript| Boolean | Number | String | Array | Tuple | Enum | Any | Void | Null and Undefined | Never | Object|
+| 类型       | 布尔值  | 数字   | 字符串 | 数组  | 元组  | 枚举 |
+| ---------- | ------- | ------ | ------ | ----- | ----- | ---- |
+| TypeScript | Boolean | Number | String | Array | Tuple | Enum | Any | Void | Null and Undefined | Never | Object |
 
 ### Boolean
+
 ### Number
+
 ### String
+
 ### Array
+
 ### Tuple
+
 ### Enum
+
 ### Any
+
 ### Void
+
 ### Null and Undefined
+
 ### Never
+
 ### Object

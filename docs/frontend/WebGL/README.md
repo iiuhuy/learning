@@ -33,7 +33,7 @@ WebGL 技术储备。
 - 光照
 - 复杂模型
 - 动画。动画的原理就是快速地擦除和重绘。常用的方法是大名鼎鼎的 requestAnimationFrame。不熟悉的同学，可以参考[司徒正美](http://www.cnblogs.com/rubylouvre/archive/2011/08/22/2148797.html)和张鑫旭的介绍。
-- WebGL 库。WebGL 最流行的库， Three.js。
+- WebGL 库。WebGL 流行的库， Three.js。
 - 调试工具。[WebGL Inspector](http://benvanik.github.io/WebGL-Inspector/)
 
 WebGL 同 Canvas 一样，需要获取绘图上下文：
@@ -43,6 +43,19 @@ var gl = canvas.getContext("webgl"); // 或者 expermental-webgl
 ```
 
 Canvas 画一个矩形是很简单的，但是 WebGL 就不一样了。
+
+同样需要获取绘图上下文：
+
+```js
+var gl = canvas.getContext("webgl"); // 或 experimental-webgl
+```
+
+例如这个样子，画一个矩形：
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="webgl-rectangle" src="//codepen.io/alvinmi/embed/QPprQj/?height=265&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/alvinmi/pen/QPprQj/'>webgl-rectangle</a> by YuHui
+  (<a href='https://codepen.io/alvinmi'>@alvinmi</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 类型化数组:
 
@@ -172,7 +185,7 @@ WebGL 程序使用三种语言开发：HTML、JavaScript 和 GLSL ES——然后
 - 2.获取 WebGL 绘图上下文
 - 3.初始化着色器
 - 4.设置 canvas 背景色
-- 5.清除 canvas 
+- 5.清除 canvas
 - 6.绘图
 
 #### 2.1.HTML 文件如何引入 WebGL JavaScript 文件？
@@ -238,9 +251,6 @@ Attribute 这个关键词被称为**储存限定符**(storage qualifier), Attrib
 
 纹理坐标系(Texture Coordinates)
 
-
-
-
 ### x.如何在三维空间中表示观察者，如何控制可视的三维空间体积？
 
 ### x.裁剪，物体的前后关系？
@@ -281,7 +291,7 @@ Matrix4.setOrtho() 函数和 Matrix4.setPerspective() 函数生成的投影矩�
 
 ### x.如何从文件中加载着色器程序？
 
-- 利用加载三维模型文件的方法；(参考附录F)
+- 利用加载三维模型文件的方法；(参考附录 F)
 
 ### x.世界坐标系和本地坐标系?
 
@@ -359,11 +369,10 @@ gl.getAttribLocation(program, name);
  * @desc 获取由 name 参数指定 attribute 变量的储存地址
  * @param {object} program - 参数 program 指定包含顶点着色器和片元着色器的着色器程序对象
  * @param {string} name    - 指定想要获取其储存地址 attribute 变量的名称
- * @returns {number} 
+ * @returns {number}
  *          返回大于或等于0  - Attribute 变量的储存地址
  *          返回-1         - 指定的 Attribute 变量不存在，或者其命名具有 gl_ 或者 webgl_ 前缀
  */
-
 ```
 
 **gl.vertexAttrib3f(a_Position, v0, v1, v2);**

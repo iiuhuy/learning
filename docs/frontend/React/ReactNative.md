@@ -17,6 +17,16 @@ TODO
 - Android Studio 安装(可以在 [developers.google.cn](https://developers.google.cn/))
 - React Native 命令行安装创建第一个项目
 
+NPM 镜像库配置(国内淘宝镜像)
+
+```bash
+$ npm config set registry https://registry.npm.taobao.org --global
+$ npm config set disturl https://npm.taobao.org/dist --global
+$ npm install -g yarn react-native-cli
+$ yarn config set registry https://registry.npm.taobao.org --global
+$ yarn config set disturl https://npm.taobao.org/dist --global
+```
+
 **Node 本地环境**
 
 推荐使用 [nvm](https://github.com/creationix/nvm/blob/master/README.md) 来管理 node 的版本。具体过程就略过了，我当前 node 版本和 nvm 管理的版本如下图：
