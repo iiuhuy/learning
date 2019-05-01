@@ -25,6 +25,8 @@ const userList = props => (
 
 ### 5.如何正确理解 React 的生命周期？
 
+
+
 每个 React 组件都会经历挂载(Mounting)、更新(Updating)、和卸载(Unmounting)的过程。
 
 React 每个过程都提供一些钩子函数，让我们可以自定义一些事情。
@@ -41,7 +43,7 @@ React 在有 Node 做中间层的时候比较适合做 SSR，另一方面需要�
 
 ### 9.JS 的基本函数式使用，比如 reduce、curry?
 
-### 10.对 Redux 和 Mobx 的设计理念理解？
+### 10.对 Redux 和 Mobx 的「设计理念」理解？
 
 ### 11.virtual-dom 的基本原理与简单的源码解释？
 
@@ -49,9 +51,29 @@ React 在有 Node 做中间层的时候比较适合做 SSR，另一方面需要�
 
 ### 12.pure-component 和 shouldComponentUpdate 相关概念的考察？
 
+**shouldComponentUpdate**
+
+- 1.决定 Virtual DOM 是否需要重绘
+- 2.一般可以由 `PureComponent` 自动实现
+- 3.典型场景：性能优化
+
+**pure-component**
+
+可以判断当前的 State 和之前的 State，当前的 props 和之前的 props 是否有变化，如果没有变化，它会自动阻止 React 去重新更新。
+
 ### 13.你认为 React 有什么应该 deprecate 的特性?
 
 ### 14.你可以聊一聊怎么改良一个 React 的数据流 lib 吗? (哈哈哈，在知乎上看到这题。(ಥ_ಥ))
+
+### 15.React Component & PureComponent 的区别？
+
+### 16.props & state?
+
+### 17.什么时候可以[直接修改] state 的值？
+
+在 Constructor 里面修改，一般来说要更新 state 都会使用 `setState` 方法， Constructor 里面什么事情都还没有做，可以使用 `this.state.xxx = "xxx"` 这样的形式修改，这也是唯一可以直接修改 State 的方法。
+
+
 
 ### 约定
 
