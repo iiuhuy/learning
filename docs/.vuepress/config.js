@@ -153,6 +153,10 @@ module.exports = {
           '/backend/Python/flask',
           // Java
 
+          // C&C++
+          // OpenGL 学习
+          '/backend/C-CPP/LearnOpenGL'
+
         ]
       },
       {
