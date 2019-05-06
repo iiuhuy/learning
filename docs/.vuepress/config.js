@@ -174,7 +174,8 @@ module.exports = {
         children: [
           '/computerbasic/',
           '/computerbasic/linear_algebra',
-          '/computerbasic/Advanced_Mathematics'
+          '/computerbasic/Advanced_Mathematics',
+          '/computerbasic/tools/'
         ]
       }
     ]
