@@ -43,13 +43,66 @@ exports.add = function() {
 };
 ```
 
+```js
+// increment.js
+
+var add = require('math').add;
+export.increment = function(val) {
+  return add(val, 1);
+}
+```
+
+```js
+// program.js
+
+var inc = require("increment").increment;
+var a = 1;
+inc(a); // 2
+
+module.id == "program";
+```
+
+node.js 模块，通常一个模块是一个遵循 CommonJS 规范书写的 JavaScript 源文件，也可能是一个后缀为 `*.node` 的 C++ 模块二进制文件，通过 require() 函数被引入并且使用。
+
 ### 8.Node.js 模块机制与包机制，由什么第三方依赖所构成？
+
+- CommonJS 规范中的包(package) 指的是一系列模块、代码以及其他资源文件的一个封装。
+
+包描述文件： 一个遵循 CommonJS 规范的包必然包含一个包描述文件。并且处于包根目录下，名为 `package.json`。包含的[必要信息](http://wiki.commonjs.org/wiki/Packages/1.0)
+
+包目录结构(一个遵循 CommonJS 规范的包目录如下)：
+
+- package.json 在根目录下
+- 二进制文件应在 bin 目录下
+- JavaScript 源码应当在 lib 目录下
+- 文档应在 doc 目录下
+- 单元测试文件应在 test 目录下
 
 **模快机制**
 
 **包机制**
 
 **依赖**
+
+### 9.Node.js 的模块寻径算法和模块缓存机制？
+
+### 10.Node.js 事件循环
+
+Node.js 事件循环是由 libuv 这个类库进行驱动的，直接用的就是 libuv 的事件循环，在 Node.js v6.9.4 下，[这几行代码](https://github.com/nodejs/node/blob/v6.9.4/src/node.cc#L4690-L4698), 点链接查看，其他版本的 `src/node.cc` 也有对相关的代码，代码如下：
+
+```cpp
+NodeInstanceData instance_data(NodeInstanceType::MAIN,
+                                uv_default_loop(),
+                                argc,
+                                const_cast<const char**>(argv),
+                                exec_argc,
+                                exec_argv,
+                                use_debug_agent);
+StartNodeInstance(&instance_data);
+exit_code = instance_data.exit_code();
+```
+
+在 Node.js 源码 `deps` 目录下，有除了 Chrome V8 和 libuv 以外的依赖。
 
 ## 一些深入学习 node.js 的参考
 
