@@ -29,6 +29,8 @@
 
 - 理脉络，认场景，扣细节。
 
->商业分析的思维养成：第一部分是看数据, 第二部分是琢磨人性!
+>商业分析的思维养成：第一部分是看数据, 第二部分是琢磨人性! (曹大)
+
+<img src="https://raw.githubusercontent.com/AlvinMi/2019-Pic/master/2019/20190514233031.jpeg"/>
 
 <img src="https://raw.githubusercontent.com/AlvinMi/2019-Pic/master/myWechat.png" height="200" width="200" />
