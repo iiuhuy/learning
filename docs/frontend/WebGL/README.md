@@ -63,13 +63,26 @@ WebGL 涉及复杂计算需要提前知道数值的精度，而标准的 JavaScr
 
 类型化数组的核心就是一个名为 **ArrayBuffer** 的类型。每个 ArrayBuffer 对象表示的只是内存中指定的字节数，但不会指定这些字节用于保存什么类型的数据。通过 ArrayBuffer 能做的，就是为将来使用而分配一定数量的字节。例如，下面这行代码会在内存中分配 20B。(和 C 的缓存一个意思么？)
 
+WebGL 中使用的各种类型化数组:
+
+| 数组类型     | 每个元素所占字节数 |           描述(C 语言中的数据类型) |
+| :----------- | :----------------: | ---------------------------------: |
+| Int8Array    |         1          |            8 位整型数(signed char) |
+| UInt8Array   |         1          |    8 位无符号整型数(unsigned char) |
+| Int16Array   |         2          |          16 位整型数(signed short) |
+| UInt16Array  |         2          | 16 位无符号整型数( unsigned short) |
+| Int32Array   |         4          |            32 位整型数(signed int) |
+| UInt32Array  |         4          |      32 位无符号整型数(signed int) |
+| Float32Array |         4          |          单精度 32 位浮点数(float) |
+| Float64Array |         6          |         双精度 64 位浮点数(double) |
+
+类型化数组不支持 `push()` 和 `pop()` 方法。创建类型化数组的唯一方法就是使用 new 运算符。
+
 ```js
 var ArrayBuffer = new ArrayBuffer(20);
 ```
 
-我擦，还真是，使用 ArrayBuffer(数组缓冲器类型)就是用来创建数组缓冲器视图。(高程 15 章 WebGL 相关内容)。
-
-类型化数组是 WebGL 项目中执行各种操作的重要基础。
+使用 ArrayBuffer(数组缓冲器类型)就是用来创建数组缓冲器视图。(高程 15 章 WebGL 相关内容)。
 
 如果 `getContext()` 无法创建 WebGL 上下文，有的浏览器会抛出错误，所以，最好把调用封装到一个 `try-catch` 块中。
 
@@ -115,13 +128,31 @@ gl.getParameter(gl.COLOR_CLEAR_VALUE);
 
 **缓冲区**
 
-顶点信息保存在 JavaScript 类型化数组中，使用之前必须转到 WebGL 的缓冲区。创建缓冲区，可以调用 [gl.createBuffer()](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGLRenderingContext/createBuffer)，然后使用 [gl.bindBuffer()](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGLRenderingContext/bindBuffer) 绑定到 WebGL 上下文，就可以用数据来填充缓冲区了，如：
+顶点信息保存在 JavaScript 数组中，使用之前必须转到 WebGL 的缓冲区。创建缓冲区，可以调用 [gl.createBuffer()](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGLRenderingContext/createBuffer)，然后使用 [gl.bindBuffer()](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGLRenderingContext/bindBuffer) 绑定到 WebGL 上下文，就可以用数据来填充缓冲区了，如：
 
 ```js
 let buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0.5, 1]), gl.STATIC_DRAW);
 ```
+
+使用缓冲区对象向顶点着色器传入多个顶点的数据，遵循下面五个步骤。
+
+- 1.创建缓冲区对象: `gl.createBuffer()`
+- 2.绑定缓冲区对象: `gl.bindBuffer()`
+- 3.将数据写入缓冲区对象: `gl.bufferData()`
+- 4.将缓冲区对象分配给一个 attribute 变量: `gl.vertexAttribPointer()`
+- 5.开启 attribute 变量: `gl.enableVertexAttribArray()`
+
+包括 WebGL 系统创建缓冲区对象方式:
+
+- `gl.createBuffer()` => `deleteBuffer(buffer)` 删除被 `gl.createBuffer()` 创建出来的缓冲区对象
+- gl.ARRAY_BUFFER
+- gl.ELEMENT_BUFFER
+
+当执行完这 5 步后, 意味着缓冲区对象和 attribute 变量之间的连接局真正建立起来了。
+
+可以使用 [gl.disableVertexAttribArray()](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawArrays)，来关闭分配。
 
 **着色器**
 
