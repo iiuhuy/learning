@@ -98,7 +98,6 @@ module.exports = {
     // 自动生成侧边栏
     // sidebar: 'auto'
 
-
     // 显示所有页面的标题链接
     // displayAllHeaders: true, // 默认值：false
 
@@ -140,7 +139,7 @@ module.exports = {
           '/frontend/WebGL/',
           '/frontend/WebGL/GLSL',
           '/frontend/TypeScript/',
-          '/frontend/Regular/'
+          '/frontend/Regexp/'
         ]
       },
       {
@@ -170,12 +169,13 @@ module.exports = {
         ]
       },
       {
-        title: '计算机基础',
+        title: '基础',
         children: [
           '/computerbasic/',
           '/computerbasic/linear_algebra',
           '/computerbasic/Advanced_Mathematics',
-          '/computerbasic/tools/'
+          '/computerbasic/tools/',
+          '/linux/'
         ]
       }
     ]
