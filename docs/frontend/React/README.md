@@ -116,6 +116,8 @@ React 在有 Node 做中间层的时候比较适合做 SSR，另一方面需要�
 
 在 Constructor 里面修改，一般来说要更新 state 都会使用 `setState` 方法， Constructor 里面什么事情都还没有做，可以使用 `this.state.xxx = "xxx"` 这样的形式修改，这也是唯一可以直接修改 State 的方法。
 
+### 19.
+
 ### 约定
 
 创建组件的单一职责原则：

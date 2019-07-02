@@ -151,7 +151,7 @@ module.exports = {
           '/backend/Python/Django',
           '/backend/Python/flask',
           // Java
-
+          '/backend/nginx/',
           // C&C++
           // OpenGL 学习
           '/backend/C-CPP/LearnOpenGL'
