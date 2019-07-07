@@ -190,7 +190,7 @@ getState 主要在两个地方需要用到：
 - 一是在 dispatch 拿到 action 后 store 需要用它来获取 state 里的数据，并把这个数据传给 reducer，这个过程是自动执行的
 - 二是在我们利用 subscribe 监听到 state 发生变化后调用它来获取新的 state 数据，如果做到这一步，说明我们已经成功了
 
-  2.dispatch(action)
+2.dispatch(action)
 
 例如 UI 上当用户点击一个 button 的时候就产生了一个 action，store 就把它 dispatch 出去，dispatch 给 reducer。
 
