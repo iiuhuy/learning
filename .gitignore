@@ -1,4 +1,4 @@
 node_modules
 .vuepress
 .vscode
-spring-boot-annotation.md
+docs/others
