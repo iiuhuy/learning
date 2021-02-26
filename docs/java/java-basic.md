@@ -27,10 +27,10 @@
 变量修饰符：
 
 - 访问控制修饰符：public、protected、default、private。
+  - public：对所有类可见。使用对象：类、接口、变量、方法；
+  - protected：对同一包内的类和所有子类可见。使用对象：变量、方法。 注意：不能修饰类（外部类）；
   - default：仅在同一包内具有作用域；
-  - protected：
-  - default：
-  - private：
+  - private：在同一类内可见。使用对象：变量、方法。注意：不能修饰类（外部类）
 
 | 修饰符    | 当前类 | 同一包内 | 子孙类（同一包） | 子孙类（不同包） | 其他包 |
 | --------- | ------ | -------- | ---------------- | ---------------- | ------ |
@@ -39,7 +39,7 @@
 | default   | ✔      | ✔        | ✔                | ❌               | ❌     |
 | private   | ✔      | ❌       | ❌               | ❌               | ❌     |
 
-![](/assert/java/access-modifier.webp)
+<img src="https://github.com/iiuhuy/learning/raw/master/assert/java/access-modifier.webp" alt="access-modifier"/>
 
 - 非访问控制修饰符：final、abstract、static、synchronized、...etc
   - final：如果变量使用 fianl 修饰符，就表示这是一个常量，不能被修改；
