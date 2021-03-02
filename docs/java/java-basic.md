@@ -296,17 +296,168 @@ Why Need 泛型？
 
 **元注解**：
 
-元注解的作用就是用于定义其它的注解。
+元注解的作用就是用于定义其它的注解。相关类型所支持的类在 [java.lang.annotation](https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/package-summary.html) 包中可以找到。
 
 `@Retention`：
 
-- 作用：
-  - 用于约束被描述的注解的作用范围；
-  - RetentionPolicy 参数：
-    - SOURCE：在源文件中有效，当执行 javac 命令时将会去除该注解；
-    
+- 作用：用于约束被描述的注解的作用范围；
+- RetentionPolicy 参数：
+  - SOURCE：在源文件中有效，当执行 javac 命令时将会去除该注解；
+  - CLASS：在 class 文件中有效，当执行 Java 命令时会去除该注解；
+  - RUNTIME：在运行时有效，可以通过反射动态获取该注解。
 
+`@Documented`：
+
+- 作用：用于指定 javadoc 生成 API 文档时显示该注解信息，它是一个标记注解没有成员。
+
+`@Target`：
+
+- 作用：用于约束被描述注解的使用范围，当被描述的注解超出使用范围则编译失败；
+- ElementType 参数：
+  - CONSTRUCTOR：用于描述构造器；
+  - FIELD：用于描述域；
+  - LOCAL_VARIABLE：用于描述局部变量；
+  - METHOD：用于描述包；
+  - PARAMETER：用于描述参数；
+  - TYPE：用于描述类、接口（包括注解类型）或者 enum 声明。
+
+`@Inherited`：
+
+- @Inherited 表示注解类型可以被继承（默认情况下不是这样）。
+
+`@Repeatable`：
+
+- @Repeatable 表示注解可以重复使用。
+
+**内置注解**
+
+`@Override`：
+
+- 作用：用于发明被修饰方法覆写了父类的方法。
+
+`@Deprecated`：
+
+- 作用：用于标明被修饰的类或类成员、类方法已经废弃、过时，不建议使用；
+- `@Deprecated` 有一定的延续性：如果我们在代码中通过集成或者覆盖的方式使用了过时的类或类成员，即使子类或子方法没有标记为 `@Deprecated`，但编译器仍然会告警。
+
+`@SuppressWarnings`：
+
+> https://docs.oracle.com/javase/8/docs/api/java/lang/SuppressWarnings.html
+
+- 作用：用于关闭对类、方法、成员编译时的特定警告；
+- 参数：
+  - deprecation：抑制与淘汰相关的警告；
+  - unchecked：抑制与未检查的作业相关的警告；
+  - fallthrough：抑制与 switch 表达式中遗漏 break 相关的警告；
+  - ......
+
+`@SafeVarargs`：
+
+- 作用：告诉编译器，在可变长参数中的泛型是类型安全的，可变长参数是使用数组存储的，而数组和泛型不能很好的混合使用。
+- 使用范围：
+  - @SafeVarargs 注解可以用于构造方法；
+  - @SafeVarargs 注解可以用于 static 或 final 方法。
+
+`@FunctionalInterface`：
+
+- 作用：告诉编译器被修饰的接口是一个函数接口；
+- 如果一个接口符合*函数接口*定义，不加 `@FunctionalInterface` 也没关系；但如果编写的不是函数式接口，却使用 `@FunctionalInterface` 那么编译器会报错。
+- 什么是函数式接口：
+  - 函数式接口（Functional Interface）是一个有且仅有一个抽象方法，但是可以有多个非抽象方法的接口，函数式接口可以被隐式转换 Lambda 表达式。
+  - 特点：
+    - 有且只有一个抽象方法（抽象方法只有方法定义，没有方法体）；
+    - 不能在接口中覆写 Object 类中的 public 方法（写了编译器也会报错）；
+    - 允许有 default 实现方法。
+
+**自定义注解**：
+
+注解的定义：public @Interface 注解名（定义体）。
+注解属性：
+
+- 语法形式：
+  ```java
+  String value() default "";
+  ```
+- 在注解中定义属性时，属性后面需要加 `()`；
+- 定义注解属性要点：
+
+  - 注解属性只能使用 public 或默认访问级别（即不指定访问级别修饰符）修饰。
+  - 注解属性的数据类型有限制要求：
+    - 所有基本数据类型（int、float、boolean、byte、double、char、long、short）
+    - String 类型
+    - Class 类型
+    - enum 类型
+    - Annotation 类型
+    - 以上所有类型的数组
+  - 注解属性必须有确定的值，建议指定默认值；
+  - 如果注解中只有一个属性值，最好将其命名未 value。
+
+注解处理器：
+
+- `java.lang.annotation.Annotation` 是一个接口，程序可以通过反射来获取指定程序元素的注解对象，通过注解对象来获取注解里面的元数据；
+- Java 中支持注解处理器接口 [java.lang.reflect.AnnotatedElement](https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/AnnotatedElement.html)，该接口代表程序中可以接受注解的程序元素；
+- AnnotatedElement 接口方法：
+  - getAnnotation：返回该程序元素上存在的、指定类型的注解，如果注解不存在则返回 null；
+  - getAnnotations：顾名思义，返回该程序元素上存在的所有注解；
+  - isAnnotationPresent：判断该程序元素上是否包含指定类型的注解，存在则返回 true，否则放回 false；
+  - getDeclaredAnnotations：返回直接存在于此元素上的所有注释。与此接口中的其他方法不同，该方法将忽略集成的注释。（如果没有注释直接存在于词元素上，则返回长度为零的一个数组）。该方法的调用者可以随意修改返回的数组，这不会对其他调用者返回的数组产生任何影响。
+- AnnotatedElement 接口主要实现类：
+  - Class：类定义；
+  - Constructor：构造器定义；
+  - Field：类的成员变量定义；
+  - Method：类的方法定义；
+  - Package：类的包定义。
 
 ## 12.序列化
 
-##
+简介：
+
+- 序列化（serialize）：将对象转换为字节流；
+- 反序列化（deserialize）：将字节流转换为对象；
+- 序列化用途：
+  - 可以将对象的字节序列持久化 ———— 保存在内存、文件、数据库中；
+  - 用于网络上传送对象的字节序列；
+  - RMI（远程方法调用）。
+- 对象序列化不回关注类中的静态变量。
+
+序列化和反序列化：
+
+- Java 通过对象输入输出流来实现序列化和反序列化：
+  - 序列化：[java.io.ObjectOutputStream](https://docs.oracle.com/javase/8/docs/api/java/io/ObjectOutputStream.html) 类的 writeObject() 方法可以实现序列化；
+  - 反序列化：[java.io.ObjectInputStream](https://docs.oracle.com/javase/8/docs/api/java/io/ObjectInputStream.html) 类的 readObject() 方法可以实现反序列化；
+
+Serializable：
+
+- 被序列化的类必须属于 Enum、Array 和 Serializable 类型其中的任何一种；
+- 如果不是 Enum、Array 的类，如果需要序列化，必须实现 java.io.Serializable 接口，否则将抛出 NotSerializableException 异常。
+- serialVersionUID：
+  - serialVersionUID 是 Java 为每个序列化类产生的版本标识；
+  - 建议在每一个序列化类中显示指定 serialVersionUID 的值，因为不同 JDK 编译很可能会生成不同 serialVersionUID 默认值，从而导致在反序列化时抛出 InvalidClassExceptions 异常；
+  - serialVersionUID 字段必须是 static final long 类型。
+
+默认序列化机制：
+
+- 如果仅仅只是让某个类实现 Serializable 接口，而没有其他任何处理的话，那么就是使用默认序列化机制；
+- 使用默认机制在序列化对象时，不仅会序列化当前对象本身，还会对其父类的字段以及父类该对象引用的其它对象也进行序列化；同理这些其他对象引用的另外对象也将被序列化，以此类推，过程会比较复杂，开销较大。
+
+非默序列化机制：
+
+- transient 关键字：当某个字段被声明为 transient 后，默认序列化机制会忽略该字段；
+- Externalizable 接口：
+  - Externalizable 继承于 Serializable，当使用该接口时，序列化的细节需要由程序员去完成；
+  - 如果使用 Externalizable 进行序列化，当读取对象时，会调用被序列化类的无参构造方法去创建一个新的对象，然后再将被保存对象的字段值分别填充到新对象中。
+- Externalizable 接口替代方法：实现 Serializable 接口，并添加 writeObject 与 readObject 方法；
+- readResolve 为了能再单例类中仍然保持序列的特性，可以使用 readResolve() 方法。
+
+序列化问题：
+
+- Java 官方的序列化性能不高，序列化后的数据相对于一些优秀的序列化工具还要大，影响存储和传输的效率；
+- Java 官方的序列化一定要实现 Serializable 接口；
+- Java 官方的序列化需要关注 serialVersionUID；
+- 无法跨语言使用。
+
+序列化工具：
+
+- thrift、protobuf -> 适用于对性能敏感，对开发体验要求不高的内部系统；
+- hessian -> 适用于对开发体验敏感，性能有要求的内外部系统；
+- jackson、gson、fastjson -> 适用于对序列化后的数据要求有良好的可读性（转为 JSON、XML 形式）。
