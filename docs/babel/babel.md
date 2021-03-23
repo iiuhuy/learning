@@ -8,6 +8,10 @@ Babel 运行方式：
 - 转换：对抽象 AST 语法树进行转换操作；
 - 再生：根据变换后的 AST 生成代码字符串。
 
+[工作流](https://github.com/jamiebuilds/the-super-tiny-compiler)可以理解为：
+
+> 输入字符串 => parser(@babel/parser) => AST => transformer(不同 plugins 转换代码) => AST => @babel/generator => 输出字符串
+
 ## Babel 核心模块
 
 - [babel-parser](https://github.com/babel/babel/tree/main/packages/babel-parser)
@@ -68,11 +72,13 @@ babel-polyfill 这里肯定离不开一个开源库 [core-js](https://github.com
 - [Symbol](https://github.com/zloirock/core-js#ecmascript-symbol)
 - [Collections](https://github.com/zloirock/core-js#ecmascript-collections)
 - [ES proposals](https://github.com/zloirock/core-js#ecmascript-proposals)
-- [等等......](https://github.com/zloirock/core-js#index) 全局对象，以及一些定义在全局对象上的方法（如：Object.assign）都不会转码。
+- [等等......](https://github.com/zloirock/core-js#index) 全局对象，以及一些定义在全局对象上的方法（如：Object.assign）都不会转码，因为为了正确的语义，babel 只转换语法而不是去增加或修改原有的属性和方法。
+
+处理这类方法的方案则被称为 polyfill。
 
 `babel-polyfill` 的缺点：
 
-- 但是由于 babel-polyfill 打包出来的体积太大，因为它把所有方法都加到了原型链上。这样就会造成一种浪费，不过可以通过单独使用 [core-js 的某个类库来解决](https://github.com/zloirock/core-js/blob/master/docs/zh_CN/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#%E5%8C%85%E5%85%A5%E5%8F%A3%E5%92%8C%E6%A8%A1%E5%9D%97%E5%90%8D%E5%AD%97)；
+- 由于 babel-polyfill 打包出来的体积太大，因为它把所有方法都加到了原型链上。这样就会造成一种浪费，不过可以通过单独使用 [core-js 的某个类库来解决](https://github.com/zloirock/core-js/blob/master/docs/zh_CN/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#%E5%8C%85%E5%85%A5%E5%8F%A3%E5%92%8C%E6%A8%A1%E5%9D%97%E5%90%8D%E5%AD%97)；
 - `babel-polyfill` 会造成全局污染，给一些类的原型链上做了修改，所以会倾向于使用 `babel-plugin-transform-runtime`
 
 ## babel-runtime
@@ -81,9 +87,46 @@ babel-runtime 是由 Babel 提供的 polyfill 库，它本身就是由 core-js �
 
 #### babel-plugin-transform-runtime
 
-▲
-
 为了解决每个定义方法的文件，重复插入了一段相同的代码，造成的浪费。
+
+比如安装了：
+
+```bash
+$ npm install --save-dev babel-plugin-transform-runtime
+$ npm install --save babel-runtime
+```
+
+Babel 会把这样的代码：
+
+```js
+class Foo {
+  method() {}
+}
+```
+
+翻译成：
+
+```js
+import _classCallCheck from "babel-runtime/helpers/classCallCheck";
+import _createClass from "babel-runtime/helpers/createClass";
+
+let Foo = (function () {
+  function Foo() {
+    _classCallCheck(this, Foo);
+  }
+
+  _createClass(Foo, [
+    {
+      key: "method",
+      value: function method() {},
+    },
+  ]);
+
+  return Foo;
+})();
+```
+
+这样就不用把 `_classCallCheck` 和 `_createClass` 这类方法放进每一个需要的文件里去了。
 
 ## 一些问题
 
@@ -94,7 +137,32 @@ Q：[regenerator 运行时库](https://github.com/facebook/regenerator/tree/mast
 A：用来实现 ES6/ES7 中 generators、yield、async 及 await 等相关的 polyfills。在 [babel-runtime](https://github.com/babel/babel/blob/main/packages/babel-runtime-corejs3/regenerator/index.js) 中被引用。
 
 Q：Babel v6 和 Babel v7 的区别？
-Q：Plugin 插件是如何工作的？
-Q：整个体系执行顺序的怎样的？
+A：如下
 
-Plugin（从前向后执行） > Preset（从后向前执行），Preset 的逆向顺序主要是为了保证向后兼容。
+- 不再支持 Node.js 0.10, 0.12, 4 和 5。可参考：[#[5025]](https://github.com/babel/babel/pull/5025)，[#[5041]](https://github.com/babel/babel/pull/5041)，[#[7755]](https://github.com/babel/babel/pull/7755)；
+- 移除[年度预设用法](https://babeljs.io/blog/2017/12/27/nearing-the-7.0-release.html#deprecated-yearly-presets-eg-babel-preset-es20xx)；
+- 移除了 [@babel/polyfill](https://github.com/babel/babel/issues/8416) 中的提议；
+- 包重命名，babylon 现在重命名为 @babel/parser，babel-cli 变成了 @babel/cli；
+- [把 TC39 提议都换成 -propoal](http://babeljs.io/blog/2017/12/27/nearing-the-7.0-release.html#renames-proposal)，把那些非年度预设的 TC39 插件中的 `-transform` 都换成了 `-propoal`，这样可以更好的区分出一个提议是否为 javascript 官方的。例如：
+  - @babel/plugin-transform-function-bind 换成了 @babel/plugin-proposal-function-bind
+  - @babel/plugin-transform-class-properties 换成了 @babel/plugin-proposal-class-properties
+- [移除包名中的年份](https://babeljs.io/blog/2017/12/27/nearing-the-7.0-release.html#renames-drop-the-year-from-the-plugin-name)，如：
+  - @babel/plugin-transform-es2015-classes 换成了 @babel/plugin-transform-classes
+
+详细参考：
+
+- https://babeljs.io/docs/en/v7-migration
+- https://babeljs.io/docs/en/config-files#6x-vs-7x-babelrc-loading
+- https://babeljs.io/blog/2018/08/27/7.0.0#babel-upgrade
+
+Q：Plugin 插件是如何工作的？
+A：了解 Babel 工作流就好理解插件是干嘛的了，`@babel/core` 加 Plugin，Babel 会按照插件定义的顺序来访问应用的方法。
+
+- 官方插件列表参考：https://babeljs.io/docs/en/plugins/
+- 社区的插件：https://www.npmjs.com/search?q=babel-plugin
+- 自己写 Babel 插件
+
+Q：整个体系执行顺序是怎样的？
+A：Plugin（从前向后执行） > Preset（从后向前执行），Preset 的逆向顺序主要是为了保证向后兼容。babel 工作流前面提到了。
+
+> preset 预设可理解为一组插件。
