@@ -166,3 +166,13 @@ Q：整个体系执行顺序是怎样的？
 A：Plugin（从前向后执行） > Preset（从后向前执行），Preset 的逆向顺序主要是为了保证向后兼容。babel 工作流前面提到了。
 
 > preset 预设可理解为一组插件。
+
+Q：关于 polyfill 按需加载配置？
+A：前面提到 babel 使用最大的诟病应该在于它过大的 polyfill。
+
+`useBuildInts` 和 `babel/plugin-transform-runtime` 不能混用。[参考](https://github.com/babel/babel/issues/10271#issuecomment-528379505)
+
+- ① preset-env + polyfill，在 useBuiltIns 设置
+- ② preset-env + transform-runtime + runtime + runtime-corejs3
+
+> https://github.com/babel/babel/issues/10008
